@@ -1,18 +1,10 @@
-extends CharacterBody3D
+extends Mob
 class_name Player
 #stats!wwwdssa
-#hp/mp
-@export var hp = 10
-@export var mp = 25
 
-#hp/mp
-@export var mhp = 10
-@export var mmp = 25
 #balancebars
 @export var bar1 = 0
 @export var bar2 = 0
-#player movement speed in m/s
-@export var speed = 6
 #atk swrd/mag
 @export var satk = 1
 @export var matk = 2
@@ -41,11 +33,6 @@ signal hurt
 signal cast(projectile, direction, location)
 
 
-#projectiles
-const projectiles ={"rocko": preload("res://rocko.tscn"), 
-			   		"flam":  preload("res://flam.tscn")}
-
-
 #physics
 # gravity when in air, m/s^2
 @export var fall_acceleration = 75
@@ -65,21 +52,10 @@ func bp(button: String) -> bool:
 
 
 
-#spells
-const rocko = {"name": "rocko", 
-			   "part": "foot",
-			   "type": "kick", 
-			   "cost": 2, 
-			   "time": 2.5}
 
-const flam = {"name": "flam",
-			  "part": "hand", 
-			  "type": "blast", 
-			  "cost": 5, 
-			  "time": 1.5}
-
-#spellslots
-var spellSlots = {"hotb1": rocko, "hotb2": flam}
+#spells and skills in books and slots
+var spellSlots = {}
+var skillSlots = {}
 @export var spellBook: Array[Spell]
 @export var skillBook: Array[Skill]
 var curSpell: Spell = null #spellSlots.hotb1
@@ -90,14 +66,16 @@ func add_spell(new_spell: Spell):
 func add_skill(new_skill: Skill):
 	skillBook.append(new_skill)
 
+func playAnim(str: String) -> void:
+	$Pivot/chocuf/AnimationPlayer.play(str)
 
 #player FIRES SPELL
 func fire_spell():
 	if mp - curSpell.cost >= 0:
 		if curSpell.type == "blast":
-			$Pivot/chocuf/AnimationPlayer.play("Blast")
+			playAnim("Blast")
 		if curSpell.type == "kick":
-			$Pivot/chocuf/AnimationPlayer.play("Kick")
+			playAnim("Kick")
 		#makes player lose appropriate mp
 		mp -= curSpell.cost
 		#and gain bar
@@ -106,21 +84,24 @@ func fire_spell():
 		#casts a magic projectile
 		cast.emit(curSpell.projectile, facing, position, 30)	
 	else: 
-		$Pivot/chocuf/AnimationPlayer.play("Hurt")
+		playAnim("Hurt")
 	casting = false
 
 var ontheground = false
+
 
 func _physics_process(delta: float) -> void:
 	if curSpell==null:
 		curSpell = spellBook[0]
 		curSkill = skillBook[0]
 		spellSlots = {"hotb1": spellBook[0], "hotb2": spellBook[1]}
-
+		skillSlots = {"hotb1": skillBook[0]}
+	
+	# handle DEATH
 	if not alive:
 		if not ontheground:
 			ontheground = true
-			$Pivot/chocuf/AnimationPlayer.play("Death")
+			playAnim("Death")
 			
 		return
 	#checks if player is alive
@@ -147,17 +128,17 @@ func _physics_process(delta: float) -> void:
 	#check if should run or walk
 	if bp("move_right") || bp("move_left") || bp("move_back") || bp("move_forward"):
 		if bp("run") and curAnim != "jump":
-			$Pivot/chocuf/AnimationPlayer.play("Run loop")
+			playAnim("Run loop")
 			speed = 5
 		elif curAnim != "jump":
-			$Pivot/chocuf/AnimationPlayer.play("Walk loop")
+			playAnim("Walk loop")
 			speed = 2
 		$Pivot/chocuf/AnimationPlayer.speed_scale = 2
 	
 	#jumping
 	if is_on_floor() and Input.is_action_pressed("jump") and curAnim != "jump":
 		target_velocity.y = jump_impulse
-		$Pivot/chocuf/AnimationPlayer.play("Jump")
+		playAnim("Jump")
 		$Pivot/chocuf/AnimationPlayer.speed_scale = 1
 	
 	curAnim = $Pivot/chocuf/AnimationPlayer.current_animation
@@ -174,7 +155,7 @@ func _physics_process(delta: float) -> void:
 	elif curAnim == "Walk loop" || curAnim == "Run loop":
 		#await get_tree().create_timer(1).timeout
 		$Pivot/chocuf/AnimationPlayer.speed_scale = 0.3
-		$Pivot/chocuf/AnimationPlayer.play("Idle loop")
+		playAnim("Idle loop")
 
 	#sets target vector
 	target_velocity.x = direction.x * speed
@@ -198,17 +179,17 @@ func _physics_process(delta: float) -> void:
 			bar1Change(curSkill.bar1)
 			bar2Change(curSkill.bar2)
 			$Pivot/chocuf/AnimationPlayer.speed_scale = 1
-			$Pivot/chocuf/AnimationPlayer.play("Atk Stab")
+			playAnim("Atk Stab")
 		else:
 			$Pivot/chocuf/AnimationPlayer.speed_scale = 1
-			$Pivot/chocuf/AnimationPlayer.play("Wave loop")
+			playAnim("Wave loop")
 	#player attacks
 	elif bp("hit"):
 		$Pivot/chocuf/AnimationPlayer.speed_scale = 2
 		if curAnim == "Atk Swing":
-			$Pivot/chocuf/AnimationPlayer.play("Atk Stab")
+			playAnim("Atk Stab")
 		else:
-			$Pivot/chocuf/AnimationPlayer.play("Atk Swing")
+			playAnim("Atk Swing")
 	#updates current time with delta if casting
 	if casting == true:
 		$Pivot/chocuf/AnimationPlayer.speed_scale = 1
@@ -218,9 +199,9 @@ func _physics_process(delta: float) -> void:
 		currentTime = 0
 		casting = true
 		if curSpell.part == "hand":
-			$Pivot/chocuf/AnimationPlayer.play("Cast hand")
+			playAnim("Cast hand")
 		if curSpell.part == "foot":
-			$Pivot/chocuf/AnimationPlayer.play("Cast foot")
+			playAnim("Cast foot")
 	#interrupts spell if the player moves
 	elif interrupted or casting == true && !bp("spell") && Input.is_anything_pressed():
 		casting = false
@@ -234,27 +215,21 @@ func _physics_process(delta: float) -> void:
 	if bp("eat") && curAnim != "Eat":
 		$Pivot/chocuf/AnimationPlayer.speed_scale = 0.8
 		if pots > 0:
-			$Pivot/chocuf/AnimationPlayer.play("Eat")
+			playAnim("Eat")
 			pots -= 1
 			hpChange(pote)
 		else:
-			$Pivot/chocuf/AnimationPlayer.play(emote)
+			playAnim(emote)
 	
 	#player emotes
 	if bp("emote"):
 		$Pivot/chocuf/AnimationPlayer.speed_scale = 0.8
-		$Pivot/chocuf/AnimationPlayer.play(emote)
+		playAnim(emote)
 	
 	#move character
 	velocity = target_velocity
 	move_and_slide()
 
-func hpChange(dif: int):
-	hp += dif
-	if hp>mhp:
-		hp = mhp
-	elif hp<0:
-		hp = 0
 
 func bar1Change(dif: int):
 	bar1 += dif
@@ -276,7 +251,7 @@ func _on_hurtplayer() -> void:
 		#player gets hurt
 		print("player HURT")
 		$Pivot/chocuf/AnimationPlayer.speed_scale = 1
-		$Pivot/chocuf/AnimationPlayer.play("Hurt")
+		playAnim("Hurt")
 		interrupted = true
 		hpChange(-1)
 	else: print("invulnerable")

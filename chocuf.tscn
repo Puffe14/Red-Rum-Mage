@@ -101,7 +101,7 @@ bones/13/rotation = Quaternion(0.990242, 0.0381341, -0.00517979, 0.13394)
 bones/14/rotation = Quaternion(-0.156236, -0.00599587, 0.0380143, 0.98697)
 
 [node name="BoneAttachmentWeapon" type="BoneAttachment3D" parent="metarig/Skeleton3D" index="6"]
-transform = Transform3D(-0.956847, -0.19897, 0.211789, 0.232265, -0.961645, 0.145919, 0.174632, 0.188813, 0.966361, -0.283116, 1.29809, -0.0836586)
+transform = Transform3D(-0.956847, -0.19897, 0.211788, 0.232265, -0.961645, 0.145919, 0.174631, 0.188813, 0.966361, -0.283117, 1.29809, -0.0836587)
 bone_name = "forearm.R"
 bone_idx = 4
 
@@ -112,7 +112,7 @@ mesh = SubResource("ArrayMesh_vbkp4")
 skeleton = NodePath("")
 
 [node name="BoneAttachmentHat" type="BoneAttachment3D" parent="metarig/Skeleton3D" index="7"]
-transform = Transform3D(1, 1.77636e-15, 2.38419e-07, 7.20816e-15, 1, -2.79397e-08, -2.38419e-07, 2.6077e-08, 1, -3.8326e-10, 1.61132, -0.0114)
+transform = Transform3D(1, -6.12843e-14, 2.3842e-07, 6.62709e-14, 1, -1.86265e-08, -2.3842e-07, 1.67638e-08, 1, -3.83284e-10, 1.61132, -0.0114)
 bone_name = "head"
 bone_idx = 5
 

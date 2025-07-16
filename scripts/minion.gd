@@ -1,6 +1,5 @@
-extends CharacterBody3D
+extends Mob
 
-const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 
 signal hurtplayer
@@ -61,7 +60,9 @@ func _on_hitbox_entered(body: Area3D) -> void:
 	print("In hitbox: " + body.name)
 	if body.name == "Projectile":
 		print("projectile hit")
-		queue_free()
+		hpChange(-1)
+		if hp<1:
+			queue_free()
 
 
 func _on_dmgbox_entered(body: Area3D) -> void:

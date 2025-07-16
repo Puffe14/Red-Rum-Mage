@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://hfj7mj6nd6k7"]
+[gd_scene load_steps=10 format=3 uid="uid://hfj7mj6nd6k7"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_hgdfo"]
 [ext_resource type="Script" path="res://scripts/important_label.gd" id="2_sme44"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dusxpl6guivo1" path="res://gooblah.tscn" id="4_hr1vl"]
 [ext_resource type="Script" path="res://scripts/skill.gd" id="4_i3mrj"]
 [ext_resource type="Resource" uid="uid://k3pf7yit0sd1" path="res://resources/skills/strike.tres" id="5_b0hqc"]
+[ext_resource type="PackedScene" uid="uid://devcfkwwa827w" path="res://scenes/reward_screen.tscn" id="7_184cg"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_wq7s5"]
 size = Vector3(20, 2, 20)
@@ -58,6 +59,9 @@ script = ExtResource("2_sme44")
 [node name="Player" parent="." groups=["player"] instance=ExtResource("3_00vey")]
 skillBook = Array[ExtResource("4_i3mrj")]([ExtResource("5_b0hqc")])
 
+[node name="BoneAttachmentWeapon" parent="Player/Pivot/chocuf/metarig/Skeleton3D" index="6"]
+transform = Transform3D(-0.956847, -0.198969, 0.211788, 0.232265, -0.961645, 0.145919, 0.174631, 0.188813, 0.966361, -0.283117, 1.29809, -0.0836587)
+
 [node name="HorizontalPivot" type="Node3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 0.94887, -0.315666, 0, 0.315666, 0.94887, 0, -1.32577, -3.22355)
 
@@ -72,10 +76,13 @@ current = true
 [node name="Gooblah" parent="." groups=["enemy"] instance=ExtResource("4_hr1vl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -4.50091)
 collision_mask = 6
+hp = 2
 
 [node name="Gooblah2" parent="." groups=["enemy"] instance=ExtResource("4_hr1vl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.15389, 0, -4.50091)
 collision_mask = 6
+
+[node name="RewardScreen" parent="." instance=ExtResource("7_184cg")]
 
 [connection signal="cast" from="Player" to="." method="_on_player_cast"]
 [connection signal="hurtplayer" from="Gooblah" to="." method="_on_hurtplayer"]
