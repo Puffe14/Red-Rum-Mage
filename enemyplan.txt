@@ -1,0 +1,27 @@
+MINIONS
+
+Gooblah
+-i dunno, some goofy goober
+-round and dumb
+
+HYDRODAMALIS GIGAS
+-Dugong Empire
+
+
+FOREFATHERS
+
+Anciennes
+-Tout vie a sa mort, tout mort a sa vie
+	kills current minions, summons last recent
+-Le mort saisit le vif
+	the player is gripped by ghastly hands and freezes
+
+Materpater
+-ALEA IEACTA EST
+	causes all attacks to hit or miss / sets damage range to single value?
+-TU FUI EGO ERIS
+	swap teleports player
+-VOX POPULI, VOX DEI
+	summons minions and increases power according to amount
+-DE TE FABULA NARRATUR
+	locks camera on player face

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=2 format=3 uid="uid://k3pf7yit0sd1"]
+
+[ext_resource type="Script" path="res://scripts/skill.gd" id="1_i0ydy"]
+
+[resource]
+script = ExtResource("1_i0ydy")
+targeting = 2
+bar1 = -5
+bar2 = -5
+dmg = 120

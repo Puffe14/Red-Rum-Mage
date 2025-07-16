@@ -1,0 +1,63 @@
+[gd_scene load_steps=7 format=3 uid="uid://hfj7mj6nd6k7"]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_hgdfo"]
+[ext_resource type="Script" path="res://scripts/important_label.gd" id="2_sme44"]
+[ext_resource type="PackedScene" uid="uid://bwt126vx6276c" path="res://player.tscn" id="3_00vey"]
+[ext_resource type="PackedScene" uid="uid://dusxpl6guivo1" path="res://gooblah.tscn" id="4_hr1vl"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_wq7s5"]
+size = Vector3(20, 2, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hfqg7"]
+size = Vector3(20, 2, 20)
+
+[node name="main" type="Node3D"]
+script = ExtResource("1_hgdfo")
+
+[node name="Ground" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+collision_layer = 4
+collision_mask = 0
+
+[node name="GroundMesh" type="MeshInstance3D" parent="Ground"]
+mesh = SubResource("BoxMesh_wq7s5")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+shape = SubResource("BoxShape3D_hfqg7")
+
+[node name="CameraPivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.63199, 3.00616)
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.98312)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.87462, 0.48481, 0, -0.48481, 0.87462, 0, 20, 9.7)
+shadow_enabled = true
+shadow_blur = 0.306
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ImportantLabel" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 8.0
+offset_right = 68.0
+offset_bottom = 57.0
+text = "HP: 10
+MP: 10"
+script = ExtResource("2_sme44")
+
+[node name="Player" parent="." groups=["player"] instance=ExtResource("3_00vey")]
+
+[node name="Gooblah" parent="." groups=["enemy"] instance=ExtResource("4_hr1vl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -4.50091)
+
+[connection signal="cast" from="Player" to="." method="_on_player_cast"]
+[connection signal="hurtplayer" from="Gooblah" to="." method="_on_hurtplayer"]
+[connection signal="hurtplayer" from="Gooblah" to="Player" method="_on_hurtplayer"]

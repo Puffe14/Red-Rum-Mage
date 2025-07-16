@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://dkvsoxai7floj"]
+
+[ext_resource type="Script" path="res://scripts/projectile.gd" id="1_8it2v"]
+[ext_resource type="BoxMesh" uid="uid://bsppr5seifgpi" path="res://meshes/rocko.tres" id="2_1mo2j"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_njov8"]
+
+[node name="rocko" type="Node3D" groups=["projectile"]]
+rotation_edit_mode = 2
+script = ExtResource("1_8it2v")
+
+[node name="Projectile" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Projectile"]
+shape = SubResource("BoxShape3D_njov8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Projectile"]
+mesh = ExtResource("2_1mo2j")

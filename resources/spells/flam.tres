@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Spell" load_steps=2 format=3 uid="uid://cwmsjmeuwdsw4"]
+
+[ext_resource type="Script" path="res://scripts/spell.gd" id="1_wsmw1"]
+
+[resource]
+script = ExtResource("1_wsmw1")
+part = "hand"
+type = "blast"
+cost = 5.0
+time = 1.5
+targeting = 1
+bar1 = 10
+bar2 = 0
+dmg = 200

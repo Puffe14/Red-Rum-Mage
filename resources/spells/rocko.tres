@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Spell" load_steps=2 format=3 uid="uid://cgg4gg73aj0v8"]
+
+[ext_resource type="Script" path="res://scripts/spell.gd" id="1_ume1v"]
+
+[resource]
+script = ExtResource("1_ume1v")
+part = "foot"
+type = "kick"
+cost = 2.0
+time = 2.5
+targeting = 1
+bar1 = 0
+bar2 = 5
+dmg = 100

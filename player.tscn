@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=3 uid="uid://bwt126vx6276c"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_o87q8"]
+[ext_resource type="Resource" uid="uid://bvs2w1mmwhyxa" path="res://resources/swords/commencer.res" id="2_dm5qw"]
+[ext_resource type="PackedScene" uid="uid://bcvl87qnhee43" path="res://chocuf.tscn" id="2_v5jyh"]
+[ext_resource type="Script" path="res://scripts/spell.gd" id="3_5gvj3"]
+[ext_resource type="Resource" uid="uid://cwmsjmeuwdsw4" path="res://resources/spells/flam.tres" id="4_rypbk"]
+[ext_resource type="Resource" uid="uid://cgg4gg73aj0v8" path="res://resources/spells/rocko.tres" id="5_ek62e"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ad6y3"]
+size = Vector3(1, 4.44434, 1)
+
+[node name="Player" type="CharacterBody3D"]
+rotation_edit_mode = 2
+collision_layer = 3
+collision_mask = 6
+script = ExtResource("1_o87q8")
+sword = ExtResource("2_dm5qw")
+spellBook = Array[ExtResource("3_5gvj3")]([ExtResource("4_rypbk"), ExtResource("5_ek62e")])
+
+[node name="Pivot" type="Node3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="chocuf" parent="Pivot" instance=ExtResource("2_v5jyh")]
+
+[node name="Rapier" parent="Pivot/chocuf/metarig/Hands" index="0"]
+visible = false
+
+[node name="Mage Hat" parent="Pivot/chocuf/metarig/Head" index="0"]
+visible = false
+
+[node name="Skeleton3D" parent="Pivot/chocuf/metarig" index="2"]
+bones/3/scale = Vector3(1, 1, 1)
+bones/6/scale = Vector3(1, 1, 1)
+bones/7/scale = Vector3(1, 1, 1)
+bones/8/scale = Vector3(1, 1, 1)
+bones/11/scale = Vector3(1, 1, 1)
+bones/12/scale = Vector3(1, 1, 1)
+bones/13/scale = Vector3(1, 1, 1)
+bones/14/scale = Vector3(1, 1, 1)
+
+[node name="BoneAttachmentWeapon" parent="Pivot/chocuf/metarig/Skeleton3D" index="6"]
+transform = Transform3D(-0.956847, -0.19897, 0.211789, 0.232265, -0.961645, 0.145919, 0.174632, 0.188813, 0.966361, -0.283116, 1.29809, -0.0836586)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.27783, 0)
+shape = SubResource("BoxShape3D_ad6y3")
+
+[editable path="Pivot/chocuf"]

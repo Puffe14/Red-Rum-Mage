@@ -1,0 +1,45 @@
+SCENES
+Main - for general testing
+	+Player
+	-Camera
+	-Mobs (porygon)
+
+Player
+	+pivot
+		+chocuf.glb
+	-player.gd script
+	+CollisionShape
+	-MobDetector
+		-CollisionShape
+
+Mob
+	-pivot
+
+Pyrogon extends Mob?
+	-pivot
+		-porygon.glb
+	-CollisionShape
+	-poryogon.gd script
+
+Music_player
+	-Music Player
+
+PSX SPECS
+Resolutions:
+	Progressive:	256×224 to 640×240 pixel
+	Interlaced:	256×448 to 640×480 pixels
+Colors:
+	Maximum color depth of 16,777,216 colors (24-bit true color)
+	57,344 (256×224) to 153,600 (640×240) colors on screen
+	Unlimited color lookup tables (CLUTs)
+	32 levels of transparency
+	All calculations are performed to 24 bit accuracy
+Texture mapping color mode:
+	Mode 4: 4-bit CLUT (16 colors)
+	Mode 8: 8-bit CLUT (256 colors)
+	Mode 15: 15-bit direct (32,768 colors)
+	Mode 24: 24-bit (16,777,216 colors)
+Sprite engine
+	1024×512 framebuffer, 8×8 and 16×16 sprite sizes, bitmap objects
+	Up to 4,000 sprites on screen (at 8×8 sprite size), scaling and rotation
+	256×256 maximum sprite size
