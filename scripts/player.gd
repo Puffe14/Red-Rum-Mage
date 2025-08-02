@@ -32,6 +32,8 @@ var itimer = 0
 signal hurt
 signal cast(projectile, direction, location)
 
+#options
+@export var update_movement_directions_only_on_stop: bool 
 
 #physics
 # gravity when in air, m/s^2
@@ -42,6 +44,7 @@ signal cast(projectile, direction, location)
 var target_velocity = Vector3.ZERO
 var direction = Vector3.ZERO
 var facing = Vector3.ZERO
+var pivot_basis = null
 
 #boolean for insert buttonpress
 func bp(button: String) -> bool:
@@ -96,7 +99,9 @@ func _physics_process(delta: float) -> void:
 		curSkill = skillBook[0]
 		spellSlots = {"hotb1": spellBook[0], "hotb2": spellBook[1]}
 		skillSlots = {"hotb1": skillBook[0]}
-	
+		pivot_basis = $HorizontalPivot.basis #$Pivot/chocuf/metarig.basis
+		#$Player/HorizontalPivot.basis #/VerticalPivot/SpringArm3D/Camera3D #$Pivot/chocuf/metarig.basis
+
 	# handle DEATH
 	if not alive:
 		if not ontheground:
@@ -115,15 +120,19 @@ func _physics_process(delta: float) -> void:
 	#if itime < itimer/4:
 	#	return
 	
+	#update movement directions
+	if !update_movement_directions_only_on_stop:
+		pivot_basis = $HorizontalPivot.basis 
+	
 	#Check each move input and change direction
 	if Input.is_action_pressed("move_right"):
-		direction.x += 1
+		direction += pivot_basis.x.normalized()
 	if Input.is_action_pressed("move_left"):
-		direction.x -= 1
+		direction -= pivot_basis.x.normalized()
 	if Input.is_action_pressed("move_back"):
-		direction.z += 1
+		direction += pivot_basis.z.normalized()
 	if Input.is_action_pressed("move_forward"):
-		direction.z -= 1
+		direction -= pivot_basis.z.normalized()
 
 	#check if should run or walk
 	if bp("move_right") || bp("move_left") || bp("move_back") || bp("move_forward"):
@@ -134,7 +143,11 @@ func _physics_process(delta: float) -> void:
 			playAnim("Walk loop")
 			speed = 2
 		$Pivot/chocuf/AnimationPlayer.speed_scale = 2
-	
+	else:
+		if update_movement_directions_only_on_stop:
+			pivot_basis = $HorizontalPivot.basis
+		#pivot_basis = $Pivot/chocuf/metarig.basis
+
 	#jumping
 	if is_on_floor() and Input.is_action_pressed("jump") and curAnim != "jump":
 		target_velocity.y = jump_impulse
@@ -245,7 +258,7 @@ func bar2Change(dif: int):
 	elif bar2<0:
 		bar2 = 0
 
-func _on_hurtplayer() -> void:
+func _on_hurtplayer(dealt:int) -> void:
 	if alive and itimer >= itime:
 		itimer = 0
 		#player gets hurt
@@ -253,7 +266,7 @@ func _on_hurtplayer() -> void:
 		$Pivot/chocuf/AnimationPlayer.speed_scale = 1
 		playAnim("Hurt")
 		interrupted = true
-		hpChange(-1)
+		hpChange(-dealt)
 	else: print("invulnerable")
 
 func actionable() -> bool:

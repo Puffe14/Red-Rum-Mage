@@ -1,0 +1,97 @@
+[gd_scene load_steps=7 format=3 uid="uid://crabmk2bxinyr"]
+
+[ext_resource type="Texture2D" uid="uid://bma57w2m7va2p" path="res://image/placeholder/label_HP_bg.png" id="1_mego3"]
+[ext_resource type="Texture2D" uid="uid://u26ucevblf6o" path="res://image/placeholder/label_HP.png" id="2_1u1kd"]
+[ext_resource type="Texture2D" uid="uid://felaobpjqpw8" path="res://image/placeholder/lifebar_bg.png" id="3_l4456"]
+[ext_resource type="Texture2D" uid="uid://b4nnh5jmje437" path="res://image/placeholder/lifebar_fill.png" id="4_kwm38"]
+[ext_resource type="Texture2D" uid="uid://cos7sovrsatu0" path="res://image/placeholder/bombs_icon.png" id="5_8ri0g"]
+
+[sub_resource type="FontFile" id="FontFile_isamu"]
+subpixel_positioning = 0
+msdf_pixel_range = 14
+msdf_size = 128
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+
+[node name="MarginContainer" type="MarginContainer"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_right = 52.0
+offset_bottom = 53.0
+grow_horizontal = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Bars" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="Bar" type="HBoxContainer" parent="HBoxContainer/Bars"]
+layout_mode = 2
+
+[node name="Count" type="MarginContainer" parent="HBoxContainer/Bars/Bar"]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+
+[node name="Background" type="NinePatchRect" parent="HBoxContainer/Bars/Bar/Count"]
+layout_mode = 2
+
+[node name="Title" type="TextureRect" parent="HBoxContainer/Bars/Bar/Count/Background"]
+visible = false
+layout_mode = 2
+offset_right = 35.0
+offset_bottom = 24.0
+texture = ExtResource("2_1u1kd")
+stretch_mode = 3
+
+[node name="Number" type="Label" parent="HBoxContainer/Bars/Bar/Count/Background"]
+visible = false
+layout_mode = 2
+offset_left = 30.0
+offset_right = 47.0
+offset_bottom = 23.0
+theme_override_fonts/font = SubResource("FontFile_isamu")
+text = "10"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Gauge" type="TextureProgressBar" parent="HBoxContainer"]
+custom_minimum_size = Vector2(50, 20)
+layout_mode = 2
+value = 50.0
+texture_under = ExtResource("3_l4456")
+texture_progress = ExtResource("4_kwm38")
+
+[node name="Counters" type="HBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="Counter" type="MarginContainer" parent="HBoxContainer/Counters"]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+
+[node name="Background" type="NinePatchRect" parent="HBoxContainer/Counters/Counter"]
+custom_minimum_size = Vector2(50, 40)
+layout_mode = 2
+texture = ExtResource("1_mego3")
+
+[node name="Number" type="Label" parent="HBoxContainer/Counters/Counter/Background"]
+layout_mode = 2
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_fonts/font = SubResource("FontFile_isamu")
+text = "10"
+vertical_alignment = 1
+
+[node name="CenterContainer" type="MarginContainer" parent="HBoxContainer/Counters/Counter/Background"]
+custom_minimum_size = Vector2(50, 40)
+layout_mode = 0
+offset_right = 80.0
+offset_bottom = 80.0
+
+[node name="Icon" type="TextureRect" parent="HBoxContainer/Counters/Counter/Background/CenterContainer"]
+layout_mode = 2
+texture = ExtResource("5_8ri0g")
+stretch_mode = 3

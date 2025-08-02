@@ -1,14 +1,17 @@
 extends Mob
 
 const JUMP_VELOCITY = 4.5
+const touch = 1
+@export var behaviour: Behaviour
+enum Behaviour {Jumpy, Walk, Dashy, Stand}
 
-signal hurtplayer
+signal hurtplayer(dealt:float)
 var target: Node3D
 
 
 func _on_player_hit() -> void:
 	print("emitted player hit")
-	hurtplayer.emit()
+	hurtplayer.emit(touch)
 
 func _on_body_detected(body: Node3D) -> void:
 	if body.name == "Player":
@@ -22,7 +25,8 @@ func _physics_process(delta: float) -> void:
 
 	# Handle jump.
 	if is_on_floor():
-		velocity.y = JUMP_VELOCITY
+		if behaviour == Behaviour.Jumpy:
+			velocity.y = JUMP_VELOCITY
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -60,7 +64,9 @@ func _on_hitbox_entered(body: Area3D) -> void:
 	print("In hitbox: " + body.name)
 	if body.name == "Projectile":
 		print("projectile hit")
-		hpChange(-1)
+		#grab the projectiles damage stored in the area3Ds parent node
+		var taken = body.get_parent().damage
+		hpChange(-taken)
 		if hp<1:
 			queue_free()
 
@@ -70,3 +76,7 @@ func _on_dmgbox_entered(body: Area3D) -> void:
 	if body.name == "Player":
 		print("player hitseds")
 		_on_player_hit()
+
+
+func _on_hurtplayer(dealt: float) -> void:
+	pass # Replace with function body.
