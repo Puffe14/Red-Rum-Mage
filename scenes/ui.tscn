@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://crabmk2bxinyr"]
+[gd_scene load_steps=12 format=3 uid="uid://dpaljsj8yntqc"]
 
 [ext_resource type="Texture2D" uid="uid://bma57w2m7va2p" path="res://image/placeholder/label_HP_bg.png" id="1_mego3"]
 [ext_resource type="Texture2D" uid="uid://u26ucevblf6o" path="res://image/placeholder/label_HP.png" id="2_1u1kd"]
@@ -106,22 +106,44 @@ layout_mode = 2
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 
-[node name="GaugeB1" type="TextureProgressBar" parent="VBoxContainer/BottomHBox/SpellGauges"]
+[node name="B1" type="VBoxContainer" parent="VBoxContainer/BottomHBox/SpellGauges"]
+layout_mode = 2
+
+[node name="GaugeB1" type="TextureProgressBar" parent="VBoxContainer/BottomHBox/SpellGauges/B1"]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
+size_flags_horizontal = 4
 value = 50.0
 fill_mode = 3
 texture_under = ExtResource("5_i8sm5")
 texture_progress = ExtResource("6_ah1iw")
 
-[node name="GaugeB2" type="TextureProgressBar" parent="VBoxContainer/BottomHBox/SpellGauges"]
+[node name="PRC" type="Label" parent="VBoxContainer/BottomHBox/SpellGauges/B1"]
 layout_mode = 2
+size_flags_horizontal = 4
+text = "00%"
+
+[node name="B2" type="VBoxContainer" parent="VBoxContainer/BottomHBox/SpellGauges"]
+layout_mode = 2
+
+[node name="GaugeB2" type="TextureProgressBar" parent="VBoxContainer/BottomHBox/SpellGauges/B2"]
+layout_mode = 2
+size_flags_horizontal = 4
 value = 50.0
 fill_mode = 3
 texture_under = ExtResource("5_i8sm5")
 texture_progress = ExtResource("7_fiwdh")
 
-[node name="GaugeHP" type="TextureProgressBar" parent="VBoxContainer/BottomHBox"]
+[node name="PRC" type="Label" parent="VBoxContainer/BottomHBox/SpellGauges/B2"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "00%"
+
+[node name="HP" type="VBoxContainer" parent="VBoxContainer/BottomHBox"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="GaugeHP" type="TextureProgressBar" parent="VBoxContainer/BottomHBox/HP"]
 custom_minimum_size = Vector2(50, 7)
 layout_mode = 2
 size_flags_vertical = 8
@@ -129,12 +151,24 @@ value = 50.0
 texture_under = ExtResource("2_tibqp")
 texture_progress = ExtResource("3_h60cw")
 
-[node name="GaugeMP" type="TextureProgressBar" parent="VBoxContainer/BottomHBox"]
+[node name="PRC" type="Label" parent="VBoxContainer/BottomHBox/HP"]
+layout_mode = 2
+text = "HP: 0/0"
+
+[node name="MP" type="VBoxContainer" parent="VBoxContainer/BottomHBox"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="GaugeMP" type="TextureProgressBar" parent="VBoxContainer/BottomHBox/MP"]
 layout_mode = 2
 size_flags_vertical = 8
 value = 50.0
 texture_under = ExtResource("2_tibqp")
 texture_progress = ExtResource("4_5vkld")
+
+[node name="PRC" type="Label" parent="VBoxContainer/BottomHBox/MP"]
+layout_mode = 2
+text = "MP: 0/0"
 
 [node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/BottomHBox"]
 layout_mode = 2

@@ -8,7 +8,7 @@ class_name Player
 #atk swrd/mag
 @export var satk = 1
 @export var matk = 2
-@export var pote = 3
+@export var potency = 3
 # sword used and potions left
 @export var pots: int = 2
 @export var sword: Sword
@@ -230,7 +230,7 @@ func _physics_process(delta: float) -> void:
 		if pots > 0:
 			playAnim("Eat")
 			pots -= 1
-			hpChange(pote)
+			hpChange(potency)
 		else:
 			playAnim(emote)
 	
@@ -271,3 +271,7 @@ func _on_hurtplayer(dealt:int) -> void:
 
 func actionable() -> bool:
 	return ["Hurt","Atk Stab","Atk Swing"].has(curAnim)
+
+func equipSword(new_sword: Sword) -> void:
+	sword = new_sword
+	$Pivot/chocuf/metarig/Skeleton3D/BoneAttachmentWeapon/Rapier.scale = sword.atk/100.0

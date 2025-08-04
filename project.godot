@@ -30,6 +30,7 @@ window/stretch/mode="viewport"
 player="the player group"
 projectile=""
 enemy=""
+room="The rooms that are make up a floor."
 
 [input]
 

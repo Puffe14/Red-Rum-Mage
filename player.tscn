@@ -1,11 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://bwt126vx6276c"]
+[gd_scene load_steps=4 format=3 uid="uid://hc7n3oum6x08"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_o87q8"]
-[ext_resource type="Resource" uid="uid://bvs2w1mmwhyxa" path="res://resources/swords/commencer.res" id="2_dm5qw"]
 [ext_resource type="PackedScene" uid="uid://bcvl87qnhee43" path="res://chocuf.tscn" id="2_v5jyh"]
-[ext_resource type="Script" path="res://scripts/spell.gd" id="3_5gvj3"]
-[ext_resource type="Resource" uid="uid://cwmsjmeuwdsw4" path="res://resources/spells/flam.tres" id="4_rypbk"]
-[ext_resource type="Resource" uid="uid://cgg4gg73aj0v8" path="res://resources/spells/rocko.tres" id="5_ek62e"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ad6y3"]
 size = Vector3(1, 4.44434, 1)
@@ -15,8 +11,6 @@ rotation_edit_mode = 2
 collision_layer = 3
 collision_mask = 6
 script = ExtResource("1_o87q8")
-sword = ExtResource("2_dm5qw")
-spellBook = Array[ExtResource("3_5gvj3")]([ExtResource("4_rypbk"), ExtResource("5_ek62e")])
 
 [node name="Pivot" type="Node3D" parent="."]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)

@@ -1,19 +1,17 @@
-[gd_scene load_steps=19 format=3 uid="uid://hfj7mj6nd6k7"]
+[gd_scene load_steps=17 format=3 uid="uid://hfj7mj6nd6k7"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_hgdfo"]
-[ext_resource type="PackedScene" uid="uid://dpaljsj8yntqc" path="res://scenes/ui.tscn" id="2_dwo3d"]
+[ext_resource type="PackedScene" uid="uid://crabmk2bxinyr" path="res://scenes/ui.tscn" id="2_dwo3d"]
 [ext_resource type="Script" path="res://scripts/important_label.gd" id="2_sme44"]
-[ext_resource type="PackedScene" uid="uid://hc7n3oum6x08" path="res://player.tscn" id="3_00vey"]
+[ext_resource type="PackedScene" uid="uid://bwt126vx6276c" path="res://player.tscn" id="3_00vey"]
 [ext_resource type="PackedScene" uid="uid://dusxpl6guivo1" path="res://gooblah.tscn" id="4_hr1vl"]
 [ext_resource type="Script" path="res://scripts/skill.gd" id="4_i3mrj"]
 [ext_resource type="Resource" uid="uid://k3pf7yit0sd1" path="res://resources/skills/strike.tres" id="5_b0hqc"]
-[ext_resource type="Script" path="res://scripts/spell.gd" id="6_q6uve"]
 [ext_resource type="Script" path="res://nodes/cam_arm.gd" id="7_te16k"]
 [ext_resource type="PackedScene" uid="uid://kab1f5kaan02" path="res://scenes/goolem.tscn" id="8_t008x"]
 [ext_resource type="PackedScene" uid="uid://ks31nqdm6mx2" path="res://scenes/room.tscn" id="9_qbmkq"]
 [ext_resource type="Script" path="res://scripts/card.gd" id="10_d0q1f"]
 [ext_resource type="Resource" uid="uid://cwmsjmeuwdsw4" path="res://resources/spells/flam.tres" id="11_i6wyi"]
-[ext_resource type="Resource" uid="uid://dm0mpc7jpx80g" path="res://resources/swords/pinky.res" id="12_abj36"]
 [ext_resource type="Resource" uid="uid://cgg4gg73aj0v8" path="res://resources/spells/rocko.tres" id="12_vyxm0"]
 [ext_resource type="Resource" uid="uid://bvs2w1mmwhyxa" path="res://resources/swords/commencer.res" id="13_l4h8s"]
 
@@ -67,8 +65,6 @@ offset_right = 548.0
 offset_bottom = 248.0
 
 [node name="Player" parent="." groups=["player"] instance=ExtResource("3_00vey")]
-sword = ExtResource("13_l4h8s")
-spellBook = Array[ExtResource("6_q6uve")]([ExtResource("11_i6wyi"), ExtResource("12_vyxm0")])
 skillBook = Array[ExtResource("4_i3mrj")]([ExtResource("5_b0hqc")])
 
 [node name="HorizontalPivot" type="Node3D" parent="Player"]
@@ -84,7 +80,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.37624, 2.4185)
 current = true
 
 [node name="Room" parent="." instance=ExtResource("9_qbmkq")]
-rewards = Array[ExtResource("10_d0q1f")]([ExtResource("5_b0hqc"), ExtResource("11_i6wyi"), ExtResource("12_vyxm0"), ExtResource("13_l4h8s"), ExtResource("12_abj36")])
+cleared = true
+rewards = Array[ExtResource("10_d0q1f")]([ExtResource("5_b0hqc"), ExtResource("11_i6wyi"), ExtResource("12_vyxm0"), ExtResource("13_l4h8s")])
 
 [node name="Gooblah" parent="Room" instance=ExtResource("4_hr1vl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -4.50091)
