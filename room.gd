@@ -16,3 +16,5 @@ func _physics_process(delta: float) -> void:
 	if !rewarded && cleared:
 		onClear()
 		rewarded = true
+	if Input.is_action_pressed("test"):
+		cleared = true

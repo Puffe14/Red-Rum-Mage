@@ -1,14 +1,15 @@
 extends Special
 class_name Spell
 
-#parameters for thespell
+#parameters for the spell
 @export var part = "" # which bar is effected
 @export var type = "" # area type
 @export var cost: float # how much mp
 @export var time: float # how long to cast
-# preload the projectile scene
-const projectilename = "res://rocko.tscn"
-const projectile = preload(projectilename)
+@export var projectile: PackedScene = null # insert the projectile scene
+
+func _init() -> void:
+	color = "purple"
 
 # add this spell to a player's spellbook
 func addToBook(player: Player):

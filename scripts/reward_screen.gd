@@ -9,7 +9,7 @@ func setCards(new_cards: Array[Card]) -> void:
 func createCardNodes():
 	for card in cards:
 		var cardNode: card_node = card_node.build(card)
-		add_child(cardNode)
+		$HBoxCards.add_child(cardNode)
 
 static func build(new_cards: Array[Card]):
 	var me = load("res://scenes/reward_screen.tscn")

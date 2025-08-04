@@ -1,5 +1,8 @@
 class_name Skill extends Special
 
+func _init() -> void:
+	color = "blue"
+
 # add this skill to a player's skillbook
 func addToBook(player: Player):
 	player.addSkill(self)

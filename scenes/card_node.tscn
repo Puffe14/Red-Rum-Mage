@@ -1,10 +1,21 @@
 [gd_scene load_steps=3 format=3 uid="uid://bqmiqxg4825vr"]
 
-[ext_resource type="Texture2D" uid="uid://dl0figlwea4fs" path="res://image/chocuf-icon.png" id="1_22g26"]
-[ext_resource type="Script" path="res://scenes/card_node.gd" id="2_id6kw"]
+[ext_resource type="Texture2D" uid="uid://bv7rxoti6jqrh" path="res://image/ui/card blank.png" id="1_68qum"]
+[ext_resource type="Script" path="res://scripts/card_node.gd" id="2_id6kw"]
 
-[node name="CardNode" type="Sprite2D"]
-position = Vector2(80, 112)
-scale = Vector2(2.28571, 4.63158)
-texture = ExtResource("1_22g26")
+[node name="CardNode" type="MarginContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
 script = ExtResource("2_id6kw")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="CardFrame" type="TextureRect" parent="VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_68qum")
+
+[node name="TitleText" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Title"
+horizontal_alignment = 1

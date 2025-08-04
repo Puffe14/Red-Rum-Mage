@@ -24,9 +24,16 @@ func _process(delta: float) -> void:
 	pt = playerNode.pots
 	b1 = playerNode.bar1
 	b2 = playerNode.bar2
-	var joe: TextureProgressBar = $MarginContainer/HBoxContainer/Gauge
-	joe.set_value_no_signal(hp)
-	joe.max_value = mhp
+	var hpb: TextureProgressBar = $MarginContainer/VBoxContainer/BottomHBox/GaugeHP
+	var mpb: TextureProgressBar = $MarginContainer/VBoxContainer/BottomHBox/GaugeMP
+	var sb1: TextureProgressBar = $MarginContainer/VBoxContainer/BottomHBox/SpellGauges/GaugeB1
+	var sb2: TextureProgressBar = $MarginContainer/VBoxContainer/BottomHBox/SpellGauges/GaugeB2
+	hpb.set_value_no_signal(hp)
+	hpb.max_value = mhp
+	mpb.set_value_no_signal(mp)
+	mpb.max_value = mmp
+	sb1.set_value_no_signal(b1)
+	sb2.set_value_no_signal(b2)
 	#$MarginContainer/HBoxContainer/Bars/Bar/Count.max_value = mhp
 	text = "HP: {health}/{maxhealth} \nMP: {magic}/{maxmagic}\nPots: {pots} \nB1: {ba1} \nB2: {ba2}".format({"health":hp, "maxhealth":mhp, "magic":mp, "maxmagic":mmp, "pots":pt, "ba1":b1, "ba2":b2})
 	text += "\nTimer: %s" %(floor(playerNode.currentTime*100)/100)
