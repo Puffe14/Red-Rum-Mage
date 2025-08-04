@@ -8,7 +8,7 @@ func _init() -> void:
 
 # add this skill to a player's skillbook
 func addToBook(player: Player):
-	player.addSkill(self)
+	player.add_skill(self)
 
 func canDo(b1: int, b2: int) -> bool:
 	return b1 >= -bar1 && b2 >= -bar2

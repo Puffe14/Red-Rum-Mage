@@ -16,4 +16,4 @@ func _init() -> void:
 
 # add this spell to a player's spellbook
 func addToBook(player: Player):
-	player.addSpell(self)
+	player.add_spell(self)

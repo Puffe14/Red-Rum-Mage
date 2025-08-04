@@ -25,7 +25,7 @@ func close():
 
 func _process(delta: float) -> void:
 	#change index for menu
-	if Input.is_action_just_pressed("cam_left"):
+	if Input.is_action_just_pressed("cam_right"):
 		index += 1
 	elif Input.is_action_just_pressed("cam_left"):
 		index -=1
@@ -38,3 +38,7 @@ func _process(delta: float) -> void:
 	if index > cards.size() - 1:
 		index = cards.size() - 1
 	$VBox/Description.text = cards[index].describe
+	for card in $VBox/HBoxCards.get_children():
+		card.scale = Vector2(1, 1)
+		if card.card == cards[index]:
+			card.scale = Vector2(1.25, 1.25)

@@ -274,4 +274,4 @@ func actionable() -> bool:
 
 func equipSword(new_sword: Sword) -> void:
 	sword = new_sword
-	$Pivot/chocuf/metarig/Skeleton3D/BoneAttachmentWeapon/Rapier.scale = sword.atk/100.0
+	#$Pivot/chocuf/metarig/Skeleton3D/BoneAttachmentWeapon/Rapier.scale = sword.atk/100.0

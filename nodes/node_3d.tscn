@@ -84,7 +84,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.37624, 2.4185)
 current = true
 
 [node name="Room" parent="." instance=ExtResource("9_qbmkq")]
-rewards = Array[ExtResource("10_d0q1f")]([ExtResource("5_b0hqc"), ExtResource("11_i6wyi"), ExtResource("12_vyxm0"), ExtResource("13_l4h8s"), ExtResource("12_abj36")])
+rewards = Array[ExtResource("10_d0q1f")]([ExtResource("5_b0hqc"), ExtResource("11_i6wyi"), ExtResource("12_vyxm0"), ExtResource("12_abj36")])
 
 [node name="Gooblah" parent="Room" instance=ExtResource("4_hr1vl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -4.50091)
