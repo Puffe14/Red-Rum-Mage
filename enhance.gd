@@ -1,4 +1,4 @@
 class_name Enhance extends Card
 
-func _init() -> void:
+func _setter() -> void:
 	color = "green"

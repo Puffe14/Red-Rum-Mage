@@ -8,7 +8,7 @@ class_name Spell
 @export var time: float # how long to cast
 @export var projectile: PackedScene = null # insert the projectile scene
 
-func _init() -> void:
+func _setter() -> void:
 	color = "purple"
 	describe = "Spell - {name}: Cost {cost}\n Target: {target}, ARM: {hands}%, LEG: {legs}%\n{desc}".format(
 		{"cost":cost, "name":title, "target":targeting, "hands": bar1, "legs" :bar2, "desc":description}

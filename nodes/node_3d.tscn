@@ -1,13 +1,11 @@
-[gd_scene load_steps=19 format=3 uid="uid://hfj7mj6nd6k7"]
+[gd_scene load_steps=17 format=3 uid="uid://hfj7mj6nd6k7"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_hgdfo"]
 [ext_resource type="PackedScene" uid="uid://dpaljsj8yntqc" path="res://scenes/ui.tscn" id="2_dwo3d"]
 [ext_resource type="Script" path="res://scripts/important_label.gd" id="2_sme44"]
 [ext_resource type="PackedScene" uid="uid://hc7n3oum6x08" path="res://player.tscn" id="3_00vey"]
 [ext_resource type="PackedScene" uid="uid://dusxpl6guivo1" path="res://gooblah.tscn" id="4_hr1vl"]
-[ext_resource type="Script" path="res://scripts/skill.gd" id="4_i3mrj"]
 [ext_resource type="Resource" uid="uid://k3pf7yit0sd1" path="res://resources/skills/strike.tres" id="5_b0hqc"]
-[ext_resource type="Script" path="res://scripts/spell.gd" id="6_q6uve"]
 [ext_resource type="Script" path="res://nodes/cam_arm.gd" id="7_te16k"]
 [ext_resource type="PackedScene" uid="uid://kab1f5kaan02" path="res://scenes/goolem.tscn" id="8_t008x"]
 [ext_resource type="PackedScene" uid="uid://ks31nqdm6mx2" path="res://scenes/room.tscn" id="9_qbmkq"]
@@ -68,8 +66,6 @@ offset_bottom = 248.0
 
 [node name="Player" parent="." groups=["player"] instance=ExtResource("3_00vey")]
 sword = ExtResource("13_l4h8s")
-spellBook = Array[ExtResource("6_q6uve")]([ExtResource("11_i6wyi"), ExtResource("12_vyxm0")])
-skillBook = Array[ExtResource("4_i3mrj")]([ExtResource("5_b0hqc")])
 
 [node name="HorizontalPivot" type="Node3D" parent="Player"]
 script = ExtResource("7_te16k")

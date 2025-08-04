@@ -12,3 +12,6 @@ enum Targeting{Self,Shoot,Target}
 
 func onPick(player: Player):
 	pass
+
+func _setter():
+	pass

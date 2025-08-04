@@ -10,6 +10,7 @@ func setCards(new_cards: Array[Card]) -> void:
 #create all the card nodes
 func createCardNodes():
 	for card in cards:
+		card._setter()
 		var cardNode: card_node = card_node.build(card)
 		$VBox/HBoxCards.add_child(cardNode)
 
