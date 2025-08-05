@@ -47,12 +47,15 @@ func _process(delta: float) -> void:
 	b2l.text = "%s" %b2
 	hpl.text = "HP: {health}/{maxhealth}".format({"health":hp, "maxhealth":mhp})
 	mpl.text = "MP: {magic}/{maxmagic}".format({"magic":mp, "maxmagic":mmp})
+	
+	text = "Pots: %s" %pt
+	text += "\nTimer: %s" %(floor(playerNode.currentTime*100)/100)
+	
+	#Handle the buttons to change based on given icons
 	var buttons = $MarginContainer/VBoxContainer/BottomHBox/ButtonLayout/Control.get_children()
-	for i in range(0, 3):
+	for i in range(0, 4):
 		if playerNode != null:
-			if i < playerNode.spellBook.size() -1:
+			if i < playerNode.spellBook.size():
 				buttons[i].texture = playerNode.spellBook[i].icon
 			else:
 				buttons[i].texture = blank
-	text = "Pots: %s" %pt
-	text += "\nTimer: %s" %(floor(playerNode.currentTime*100)/100)
