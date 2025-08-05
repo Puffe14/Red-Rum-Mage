@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bqmiqxg4825vr"]
+[gd_scene load_steps=4 format=3 uid="uid://bqmiqxg4825vr"]
 
 [ext_resource type="Texture2D" uid="uid://bv7rxoti6jqrh" path="res://image/ui/card blank.png" id="1_68qum"]
 [ext_resource type="Script" path="res://scripts/card_node.gd" id="2_id6kw"]
+[ext_resource type="Texture2D" uid="uid://c2stai6lfbh7v" path="res://image/icons/unknown.png" id="3_7vmtd"]
 
 [node name="CardNode" type="MarginContainer"]
 offset_right = 40.0
@@ -11,9 +12,16 @@ script = ExtResource("2_id6kw")
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 
-[node name="CardFrame" type="TextureRect" parent="VBoxContainer"]
+[node name="CardPic" type="CenterContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="CardFrame" type="TextureRect" parent="VBoxContainer/CardPic"]
 layout_mode = 2
 texture = ExtResource("1_68qum")
+
+[node name="CardIcon" type="TextureRect" parent="VBoxContainer/CardPic"]
+layout_mode = 2
+texture = ExtResource("3_7vmtd")
 
 [node name="TitleText" type="Label" parent="VBoxContainer"]
 layout_mode = 2

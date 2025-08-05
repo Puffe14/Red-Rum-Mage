@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=2 format=3 uid="uid://k3pf7yit0sd1"]
+[gd_resource type="Resource" script_class="Skill" load_steps=3 format=3 uid="uid://k3pf7yit0sd1"]
 
+[ext_resource type="Texture2D" uid="uid://b7fn8mgiru5ec" path="res://image/icons/strike.png" id="1_3bd3p"]
 [ext_resource type="Script" path="res://scripts/skill.gd" id="1_i0ydy"]
 
 [resource]
@@ -9,6 +10,6 @@ bar1 = -5
 bar2 = -5
 dmg = 125
 color = "blue"
-icon = "icon.png"
+icon = ExtResource("1_3bd3p")
 title = "Strike"
 description = "A stronger strike imbued with a little magic."

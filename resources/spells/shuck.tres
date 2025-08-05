@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Spell" load_steps=3 format=3 uid="uid://d1gc241s0w44b"]
+
+[ext_resource type="Texture2D" uid="uid://b0j47s51ohaqh" path="res://image/icons/shuck.png" id="1_w51bw"]
+[ext_resource type="Script" path="res://scripts/spell.gd" id="2_mkvbf"]
+
+[resource]
+script = ExtResource("2_mkvbf")
+part = "\"hands\""
+type = "\"blast\""
+cost = 4.0
+time = 1.0
+targeting = 0
+bar1 = 15
+bar2 = 15
+dmg = 3
+color = "none"
+icon = ExtResource("1_w51bw")
+title = "card"
+description = "default card"

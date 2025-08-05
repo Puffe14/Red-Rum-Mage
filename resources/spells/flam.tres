@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="Spell" load_steps=3 format=3 uid="uid://cwmsjmeuwdsw4"]
+[gd_resource type="Resource" script_class="Spell" load_steps=4 format=3 uid="uid://cwmsjmeuwdsw4"]
 
 [ext_resource type="PackedScene" uid="uid://bppw237rdg1ai" path="res://scenes/projectile/flam.tscn" id="1_12a4a"]
+[ext_resource type="Texture2D" uid="uid://4ractopaj8l3" path="res://image/icons/flam.png" id="1_vct6s"]
 [ext_resource type="Script" path="res://scripts/spell.gd" id="1_wsmw1"]
 
 [resource]
@@ -9,13 +10,12 @@ part = "hand"
 type = "blast"
 cost = 5.0
 time = 1.5
-projectilename = "flam"
 projectile = ExtResource("1_12a4a")
 targeting = 1
 bar1 = 10
-bar2 = null
+bar2 = 0
 dmg = 200
 color = "purple"
-icon = null
+icon = ExtResource("1_vct6s")
 title = "Flam"
-description = null
+description = "default card"

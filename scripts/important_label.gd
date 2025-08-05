@@ -8,7 +8,7 @@ var pt = 0
 var b1 = 0
 var b2 = 0
 var playerNode: Player
-
+var blank = preload("res://image/icons/blank.png")
 
 func _ready() -> void:
 	text = "HP: {health}/{maxhealth} \n MP: {magic}/{maxmagic}".format({"health":hp, "maxhealth":mhp, "magic":mp, "maxmagic":mmp})
@@ -47,6 +47,12 @@ func _process(delta: float) -> void:
 	b2l.text = "%s" %b2
 	hpl.text = "HP: {health}/{maxhealth}".format({"health":hp, "maxhealth":mhp})
 	mpl.text = "MP: {magic}/{maxmagic}".format({"magic":mp, "maxmagic":mmp})
-	#$MarginContainer/HBoxContainer/Bars/Bar/Count.max_value = mhp
+	var buttons = $MarginContainer/VBoxContainer/BottomHBox/ButtonLayout/Control.get_children()
+	for i in range(0, 3):
+		if playerNode != null:
+			if i < playerNode.spellBook.size() -1:
+				buttons[i].texture = playerNode.spellBook[i].icon
+			else:
+				buttons[i].texture = blank
 	text = "Pots: %s" %pt
 	text += "\nTimer: %s" %(floor(playerNode.currentTime*100)/100)

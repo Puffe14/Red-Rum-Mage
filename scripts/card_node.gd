@@ -13,7 +13,8 @@ var texture_map = { "blue": load("res://image/ui/card blue.png"),
 #set all the card node's info based on the given card
 func setCard(new_card: Card) -> void:
 	card = new_card
-	$VBoxContainer/CardFrame.texture = texture_map[card.color]
+	$VBoxContainer/CardPic/CardFrame.texture = texture_map[card.color]
+	$VBoxContainer/CardPic/CardIcon.texture = card.icon
 	$VBoxContainer/TitleText.text = card.title
 
 #create a new card node based on the given card and return it
