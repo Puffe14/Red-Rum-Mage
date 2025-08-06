@@ -10,6 +10,7 @@ var b2 = 0
 var playerNode: Player
 var blank = preload("res://image/icons/blank.png")
 
+
 func _ready() -> void:
 	text = "HP: {health}/{maxhealth} \n MP: {magic}/{maxmagic}".format({"health":hp, "maxhealth":mhp, "magic":mp, "maxmagic":mmp})
 	var playerGroup = get_tree().get_nodes_in_group("player")
@@ -53,9 +54,23 @@ func _process(delta: float) -> void:
 	
 	#Handle the buttons to change based on given icons
 	var buttons = $MarginContainer/VBoxContainer/BottomHBox/ButtonLayout/Control.get_children()
-	for i in range(0, 4):
-		if playerNode != null:
-			if i < playerNode.spellBook.size():
-				buttons[i].texture = playerNode.spellBook[i].icon
+
+	if playerNode != null:
+		#select the list to be drawn
+		var list
+		if playerNode.spelling:
+			list = playerNode.spellSlots.map(icon)
+		elif playerNode.skilling:
+			list = playerNode.skillSlots.map(icon)
+		else:
+			list = playerNode.base_icons
+		for i in range(0, 4):
+			#now set the icons
+			if i < list.size():
+				buttons[i].texture = list[i]
 			else:
 				buttons[i].texture = blank
+
+#callable for icon of card
+func icon(card: Card):
+	return card.icon

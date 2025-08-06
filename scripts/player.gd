@@ -18,13 +18,17 @@ class_name Player
 #non stat variables
 @export var alive: bool = true
 @export var emote: String = "SMH"
+@export var spelling: bool = false
+@export var skilling: bool = false
+@export var base_icons: Array[CompressedTexture2D]
+
 var curAnim
 #casting and timer
 var interrupted = false
 var casting = false
 @export var currentTime = 0
 #time for invincibility
-var itime = 0.8
+@export var itime = 0.8
 var itimer = 0
 
 
@@ -57,8 +61,8 @@ func bp(button: String) -> bool:
 
 
 #spells and skills in books and slots
-var spellSlots = {}
-var skillSlots = {}
+@export var spellSlots: Array[Spell]
+@export var skillSlots: Array[Skill]
 @export var spellBook: Array[Spell]
 @export var skillBook: Array[Skill]
 var curSpell: Spell = null #spellSlots.hotb1
@@ -66,8 +70,10 @@ var curSkill: Skill = null
 
 func add_spell(new_spell: Spell):
 	spellBook.append(new_spell)
+	spellSlots = spellBook.slice(0,3)
 func add_skill(new_skill: Skill):
 	skillBook.append(new_skill)
+	skillSlots = skillBook.slice(0,3)
 
 func playAnim(str: String) -> void:
 	$Pivot/chocuf/AnimationPlayer.play(str)
@@ -85,7 +91,7 @@ func fire_spell():
 		bar1Change(curSpell.bar1)
 		bar2Change(curSpell.bar2)
 		#casts a magic projectile
-		cast.emit(curSpell.projectile, facing, position, 30)	
+		cast.emit(curSpell.projectile, facing, position, 30)
 	else: 
 		playAnim("Hurt")
 	casting = false
@@ -97,8 +103,8 @@ func _physics_process(delta: float) -> void:
 	if curSpell==null:
 		curSpell = spellBook[0]
 		curSkill = skillBook[0]
-		spellSlots = {"hotb1": spellBook[0], "hotb2": spellBook[1]}
-		skillSlots = {"hotb1": skillBook[0]}
+		spellSlots = spellBook.slice(0,3)
+		skillSlots = skillBook.slice(0,3)
 		pivot_basis = $HorizontalPivot.basis #$Pivot/chocuf/metarig.basis
 		#$Player/HorizontalPivot.basis #/VerticalPivot/SpringArm3D/Camera3D #$Pivot/chocuf/metarig.basis
 
@@ -133,6 +139,17 @@ func _physics_process(delta: float) -> void:
 		direction += pivot_basis.z.normalized()
 	if Input.is_action_pressed("move_forward"):
 		direction -= pivot_basis.z.normalized()
+	
+	#Check whether the player is accessing the hotbar for skills or spells
+	if bp("skill"):
+		skilling = true
+		spelling = false
+	elif bp("spell"):
+		spelling = true
+		skilling = false
+	else:
+		spelling = false
+		skilling = false
 
 	#check if should run or walk
 	if bp("move_right") || bp("move_left") || bp("move_back") || bp("move_forward"):
@@ -149,7 +166,7 @@ func _physics_process(delta: float) -> void:
 		#pivot_basis = $Pivot/chocuf/metarig.basis
 
 	#jumping
-	if is_on_floor() and Input.is_action_pressed("jump") and curAnim != "jump":
+	if is_on_floor() and bp("jump") and curAnim != "jump":
 		target_velocity.y = jump_impulse
 		playAnim("Jump")
 		$Pivot/chocuf/AnimationPlayer.speed_scale = 1
@@ -178,16 +195,28 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		target_velocity.y = target_velocity.y -(fall_acceleration * delta)
 	
-	#use hot bar to set spell action
-	if bp("hotb1"):
-		curSpell = spellSlots.hotb1
-	if bp("hotb2"):
-		curSpell = spellSlots.hotb2
-	if bp("hotb3"):
-		curSkill = skillBook[0]
+	#use hot bar to set spell or skill action
+	if spelling:
+		if bp("hotb1"):
+			curSpell = spellSlots[0]
+		if bp("hotb2"):
+			curSpell = spellSlots[1]
+		if bp("hotb3"):
+			curSpell = spellSlots[2]
+		if bp("hotb3"):
+			curSpell = spellSlots[3]
+	if skilling:
+		if bp("hotb1"):
+			curSkill = skillSlots[0]
+		if bp("hotb2"):
+			curSkill = skillSlots[1]
+		if bp("hotb3"):
+			curSkill = skillSlots[2]
+		if bp("hotb3"):
+			curSkill = skillSlots[3]
 	
 	#player skills
-	if bp("skills") && actionable():
+	if skilling && bp("cast") && actionable():
 		if curSkill.canDo(bar1,bar2):
 			bar1Change(curSkill.bar1)
 			bar2Change(curSkill.bar2)
@@ -208,7 +237,7 @@ func _physics_process(delta: float) -> void:
 		$Pivot/chocuf/AnimationPlayer.speed_scale = 1
 		currentTime += delta
 	#player begins to cast spell
-	if bp("spell"):
+	if spelling && bp("cast"):
 		currentTime = 0
 		casting = true
 		if curSpell.part == "hand":
@@ -270,7 +299,7 @@ func _on_hurtplayer(dealt:int) -> void:
 	else: print("invulnerable")
 
 func actionable() -> bool:
-	return ["Hurt","Atk Stab","Atk Swing"].has(curAnim)
+	return !["Hurt","Atk Stab","Atk Swing"].has(curAnim)
 
 func equipSword(new_sword: Sword) -> void:
 	sword = new_sword

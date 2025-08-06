@@ -1,10 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://hc7n3oum6x08"]
+[gd_scene load_steps=13 format=3 uid="uid://hc7n3oum6x08"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_o87q8"]
+[ext_resource type="Texture2D" uid="uid://b54g811b01ar6" path="res://image/icons/jump icon.png" id="2_e0i7m"]
 [ext_resource type="PackedScene" uid="uid://bcvl87qnhee43" path="res://chocuf.tscn" id="2_v5jyh"]
 [ext_resource type="Script" path="res://scripts/spell.gd" id="3_5gvj3"]
+[ext_resource type="Texture2D" uid="uid://dhq24u5kmrbfb" path="res://image/icons/run icon.png" id="3_v7cqo"]
 [ext_resource type="Resource" uid="uid://cwmsjmeuwdsw4" path="res://resources/spells/flam.tres" id="4_rypbk"]
+[ext_resource type="Texture2D" uid="uid://51dfo2r1oonj" path="res://image/icons/jar icon.png" id="4_tkerm"]
 [ext_resource type="Script" path="res://scripts/skill.gd" id="5_0wehl"]
+[ext_resource type="Texture2D" uid="uid://dk5frdrhbqxi4" path="res://image/icons/hit icon.png" id="5_35k85"]
 [ext_resource type="Resource" uid="uid://cgg4gg73aj0v8" path="res://resources/spells/rocko.tres" id="5_ek62e"]
 [ext_resource type="Resource" uid="uid://k3pf7yit0sd1" path="res://resources/skills/strike.tres" id="6_cjnw7"]
 
@@ -16,6 +20,7 @@ rotation_edit_mode = 2
 collision_layer = 3
 collision_mask = 6
 script = ExtResource("1_o87q8")
+base_icons = Array[CompressedTexture2D]([ExtResource("2_e0i7m"), ExtResource("3_v7cqo"), ExtResource("4_tkerm"), ExtResource("5_35k85")])
 spellBook = Array[ExtResource("3_5gvj3")]([ExtResource("4_rypbk"), ExtResource("5_ek62e")])
 skillBook = Array[ExtResource("5_0wehl")]([ExtResource("6_cjnw7")])
 
@@ -42,6 +47,9 @@ bones/14/scale = Vector3(1, 1, 1)
 
 [node name="BoneAttachmentWeapon" parent="Pivot/chocuf/metarig/Skeleton3D" index="6"]
 transform = Transform3D(-0.956847, -0.198969, 0.211788, 0.232265, -0.961645, 0.145919, 0.174631, 0.188813, 0.966361, -0.283117, 1.29809, -0.0836587)
+
+[node name="BoneAttachmentHat" parent="Pivot/chocuf/metarig/Skeleton3D" index="7"]
+transform = Transform3D(1, -6.12843e-14, 2.3842e-07, 6.62709e-14, 1, -1.86265e-08, -2.3842e-07, 1.67638e-08, 1, -3.83284e-10, 1.61132, -0.0114)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.27783, 0)

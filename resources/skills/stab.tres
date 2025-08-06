@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=3 format=3 uid="uid://cqwkq8ee7ctk8"]
+
+[ext_resource type="Texture2D" uid="uid://dkec7vdlethib" path="res://image/icons/stab.png" id="1_wqdmm"]
+[ext_resource type="Script" path="res://scripts/skill.gd" id="2_jteld"]
+
+[resource]
+script = ExtResource("2_jteld")
+targeting = 0
+bar1 = 1
+bar2 = 1
+dmg = 200
+color = "red"
+icon = ExtResource("1_wqdmm")
+title = "Stab"
+description = "An enchanced stab that pierces all."

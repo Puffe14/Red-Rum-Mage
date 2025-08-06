@@ -5,9 +5,9 @@
 [ext_resource type="Script" path="res://scripts/important_label.gd" id="2_sme44"]
 [ext_resource type="PackedScene" uid="uid://hc7n3oum6x08" path="res://player.tscn" id="3_00vey"]
 [ext_resource type="PackedScene" uid="uid://dusxpl6guivo1" path="res://gooblah.tscn" id="4_hr1vl"]
-[ext_resource type="Resource" uid="uid://k3pf7yit0sd1" path="res://resources/skills/strike.tres" id="5_b0hqc"]
 [ext_resource type="Script" path="res://nodes/cam_arm.gd" id="7_te16k"]
 [ext_resource type="PackedScene" uid="uid://kab1f5kaan02" path="res://scenes/goolem.tscn" id="8_t008x"]
+[ext_resource type="Resource" uid="uid://cqwkq8ee7ctk8" path="res://resources/skills/stab.tres" id="9_ph784"]
 [ext_resource type="PackedScene" uid="uid://ks31nqdm6mx2" path="res://scenes/room.tscn" id="9_qbmkq"]
 [ext_resource type="Script" path="res://scripts/card.gd" id="10_d0q1f"]
 [ext_resource type="Resource" uid="uid://cwmsjmeuwdsw4" path="res://resources/spells/flam.tres" id="11_i6wyi"]
@@ -68,12 +68,6 @@ offset_bottom = 248.0
 [node name="Player" parent="." groups=["player"] instance=ExtResource("3_00vey")]
 sword = ExtResource("13_l4h8s")
 
-[node name="BoneAttachmentWeapon" parent="Player/Pivot/chocuf/metarig/Skeleton3D" index="6"]
-transform = Transform3D(-0.956847, -0.198969, 0.211788, 0.232265, -0.961645, 0.145919, 0.174631, 0.188813, 0.966361, -0.283117, 1.29809, -0.0836587)
-
-[node name="BoneAttachmentHat" parent="Player/Pivot/chocuf/metarig/Skeleton3D" index="7"]
-transform = Transform3D(1, -6.12843e-14, 2.3842e-07, 6.62709e-14, 1, -1.86265e-08, -2.3842e-07, 1.67638e-08, 1, -3.83284e-10, 1.61132, -0.0114)
-
 [node name="HorizontalPivot" type="Node3D" parent="Player"]
 script = ExtResource("7_te16k")
 
@@ -87,7 +81,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.37624, 2.4185)
 current = true
 
 [node name="Room" parent="." instance=ExtResource("9_qbmkq")]
-rewards = Array[ExtResource("10_d0q1f")]([ExtResource("5_b0hqc"), ExtResource("11_i6wyi"), ExtResource("12_vyxm0"), ExtResource("12_abj36"), ExtResource("13_xthmi")])
+rewards = Array[ExtResource("10_d0q1f")]([ExtResource("9_ph784"), ExtResource("11_i6wyi"), ExtResource("12_vyxm0"), ExtResource("12_abj36"), ExtResource("13_xthmi")])
 
 [node name="Gooblah" parent="Room" instance=ExtResource("4_hr1vl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -4.50091)
