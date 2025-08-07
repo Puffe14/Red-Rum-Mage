@@ -37,7 +37,9 @@ signal hurt
 signal cast(projectile, direction, location)
 
 #options
-@export var update_movement_directions_only_on_stop: bool 
+@export var update_movement_directions_only_on_stop: bool
+@export var insta_cast_button: bool = true
+var insta_cbb: bool = false
 
 #physics
 # gravity when in air, m/s^2
@@ -51,8 +53,10 @@ var facing = Vector3.ZERO
 var pivot_basis = null
 
 #boolean for insert buttonpress
-func bp(button: String) -> bool:
-	if Input.is_action_pressed(button):
+func bp(button: String, just_pressed: bool = false) -> bool:
+	if just_pressed:
+		return Input.is_action_just_pressed(button)
+	elif Input.is_action_pressed(button):
 		return true
 	else:
 		return false
@@ -153,7 +157,7 @@ func _physics_process(delta: float) -> void:
 
 	#check if should run or walk
 	if bp("move_right") || bp("move_left") || bp("move_back") || bp("move_forward"):
-		if bp("run") and curAnim != "jump":
+		if bp("run") and curAnim != "jump" and !skill_or_spelling():
 			playAnim("Run loop")
 			speed = 5
 		elif curAnim != "jump":
@@ -166,7 +170,7 @@ func _physics_process(delta: float) -> void:
 		#pivot_basis = $Pivot/chocuf/metarig.basis
 
 	#jumping
-	if is_on_floor() and bp("jump") and curAnim != "jump":
+	if is_on_floor() and !skill_or_spelling() and bp("jump") and curAnim != "jump":
 		target_velocity.y = jump_impulse
 		playAnim("Jump")
 		$Pivot/chocuf/AnimationPlayer.speed_scale = 1
@@ -215,8 +219,11 @@ func _physics_process(delta: float) -> void:
 		if bp("hotb3"):
 			curSkill = skillSlots[3]
 	
+	if insta_cast_button:
+		insta_cbb = bp("hotb1", true) || bp("hotb2", true) || bp("hotb3", true) || bp("hotb4", true)
+	
 	#player skills
-	if skilling && bp("cast") && actionable():
+	if skilling && (bp("cast")||insta_cbb) && actionable():
 		if curSkill.canDo(bar1,bar2):
 			bar1Change(curSkill.bar1)
 			bar2Change(curSkill.bar2)
@@ -226,7 +233,7 @@ func _physics_process(delta: float) -> void:
 			$Pivot/chocuf/AnimationPlayer.speed_scale = 1
 			playAnim("Wave loop")
 	#player attacks
-	elif bp("hit"):
+	elif bp("hit") and !skill_or_spelling():
 		$Pivot/chocuf/AnimationPlayer.speed_scale = 2
 		if curAnim == "Atk Swing":
 			playAnim("Atk Stab")
@@ -237,7 +244,7 @@ func _physics_process(delta: float) -> void:
 		$Pivot/chocuf/AnimationPlayer.speed_scale = 1
 		currentTime += delta
 	#player begins to cast spell
-	if spelling && bp("cast"):
+	if spelling && (bp("cast")||insta_cbb):
 		currentTime = 0
 		casting = true
 		if curSpell.part == "hand":
@@ -245,7 +252,7 @@ func _physics_process(delta: float) -> void:
 		if curSpell.part == "foot":
 			playAnim("Cast foot")
 	#interrupts spell if the player moves
-	elif interrupted or casting == true && !bp("spell") && Input.is_anything_pressed():
+	elif interrupted or casting == true && (Input.is_anything_pressed()&&!bp("spell")):
 		casting = false
 		interrupted = false
 		print("casting interrupted")
@@ -254,7 +261,7 @@ func _physics_process(delta: float) -> void:
 		fire_spell()
 	
 	#player uses a consumable
-	if bp("eat") && curAnim != "Eat":
+	if bp("eat", true) and !skill_or_spelling() and curAnim != "Eat":
 		$Pivot/chocuf/AnimationPlayer.speed_scale = 0.8
 		if pots > 0:
 			playAnim("Eat")
@@ -269,6 +276,7 @@ func _physics_process(delta: float) -> void:
 		playAnim(emote)
 	
 	#move character
+	insta_cbb = false
 	velocity = target_velocity
 	move_and_slide()
 
@@ -304,3 +312,6 @@ func actionable() -> bool:
 func equipSword(new_sword: Sword) -> void:
 	sword = new_sword
 	#$Pivot/chocuf/metarig/Skeleton3D/BoneAttachmentWeapon/Rapier.scale = sword.atk/100.0
+
+func skill_or_spelling() -> bool:
+	return skilling or spelling
