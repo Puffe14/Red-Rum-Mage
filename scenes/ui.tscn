@@ -3,12 +3,12 @@
 [ext_resource type="Texture2D" uid="uid://bma57w2m7va2p" path="res://image/placeholder/label_HP_bg.png" id="1_mego3"]
 [ext_resource type="Texture2D" uid="uid://u26ucevblf6o" path="res://image/placeholder/label_HP.png" id="2_1u1kd"]
 [ext_resource type="Texture2D" uid="uid://deq5yxfcea04b" path="res://image/ui/slim bar bg.png" id="2_tibqp"]
-[ext_resource type="Texture2D" uid="uid://kiesgcsw4ewj" path="res://image/ui/slim bar f1.png" id="3_h60cw"]
 [ext_resource type="Texture2D" uid="uid://r5bsrowdnjqf" path="res://image/ui/slim bar f2.png" id="4_5vkld"]
 [ext_resource type="Texture2D" uid="uid://cos7sovrsatu0" path="res://image/placeholder/bombs_icon.png" id="5_8ri0g"]
 [ext_resource type="Texture2D" uid="uid://0sabpmlj5q6e" path="res://image/ui/verti bar bg.png" id="5_i8sm5"]
 [ext_resource type="Texture2D" uid="uid://cnst3uxnfhipr" path="res://image/ui/verti bar f1.png" id="6_ah1iw"]
 [ext_resource type="Texture2D" uid="uid://wnnb1fbjtqd7" path="res://image/ui/verti bar f2.png" id="7_fiwdh"]
+[ext_resource type="PackedScene" uid="uid://bibraxe3vprps" path="res://scenes/ui/hpbar.tscn" id="7_x7pn3"]
 [ext_resource type="Texture2D" uid="uid://c3q0l205x2i6x" path="res://image/ui/button bg.png" id="10_3pv0m"]
 [ext_resource type="Texture2D" uid="uid://c2stai6lfbh7v" path="res://image/icons/unknown.png" id="11_hwo7k"]
 
@@ -50,7 +50,6 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="Title" type="TextureRect" parent="VBoxContainer/HBoxContainer/Bars/Bar/Count/Background"]
-visible = false
 layout_mode = 2
 offset_right = 35.0
 offset_bottom = 24.0
@@ -58,10 +57,9 @@ texture = ExtResource("2_1u1kd")
 stretch_mode = 3
 
 [node name="Number" type="Label" parent="VBoxContainer/HBoxContainer/Bars/Bar/Count/Background"]
-visible = false
 layout_mode = 2
-offset_left = 30.0
-offset_right = 47.0
+offset_left = 40.0
+offset_right = 57.0
 offset_bottom = 23.0
 theme_override_fonts/font = SubResource("FontFile_isamu")
 text = "10"
@@ -140,21 +138,8 @@ layout_mode = 2
 size_flags_horizontal = 4
 text = "00%"
 
-[node name="HP" type="VBoxContainer" parent="VBoxContainer/BottomHBox"]
+[node name="HP" parent="VBoxContainer/BottomHBox" instance=ExtResource("7_x7pn3")]
 layout_mode = 2
-size_flags_vertical = 8
-
-[node name="GaugeHP" type="TextureProgressBar" parent="VBoxContainer/BottomHBox/HP"]
-custom_minimum_size = Vector2(50, 7)
-layout_mode = 2
-size_flags_vertical = 8
-value = 50.0
-texture_under = ExtResource("2_tibqp")
-texture_progress = ExtResource("3_h60cw")
-
-[node name="PRC" type="Label" parent="VBoxContainer/BottomHBox/HP"]
-layout_mode = 2
-text = "HP: 0/0"
 
 [node name="MP" type="VBoxContainer" parent="VBoxContainer/BottomHBox"]
 layout_mode = 2

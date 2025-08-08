@@ -16,6 +16,8 @@ mp = 0
 mhp = 2
 mmp = 0
 speed = 5
+auto_attacks = false
+touch_attacks = true
 
 [node name="gooblah" parent="." instance=ExtResource("2_w5saw")]
 

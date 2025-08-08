@@ -8,6 +8,7 @@ var pt = 0
 var b1 = 0
 var b2 = 0
 var playerNode: Player
+var target: Node3D = null
 var blank = preload("res://image/icons/blank.png")
 
 
@@ -30,6 +31,7 @@ func _process(delta: float) -> void:
 	pt = playerNode.pots
 	b1 = playerNode.bar1
 	b2 = playerNode.bar2
+	target = playerNode.target
 	var hpb: TextureProgressBar = $MarginContainer/VBoxContainer/BottomHBox/HP/GaugeHP
 	var mpb: TextureProgressBar = $MarginContainer/VBoxContainer/BottomHBox/MP/GaugeMP
 	var sb1: TextureProgressBar = $MarginContainer/VBoxContainer/BottomHBox/SpellGauges/B1/GaugeB1
@@ -51,6 +53,14 @@ func _process(delta: float) -> void:
 	
 	text = "Pots: %s" %pt
 	text += "\nTimer: %s" %(floor(playerNode.currentTime*100)/100)
+	
+	#Handle displaying target information
+	if target!=null:
+		$MarginContainer/VBoxContainer/HBoxContainer/Bars/Bar/Count.set_visible(true)
+		$MarginContainer/VBoxContainer/HBoxContainer/Bars/Bar/Count/Background/Number.text = "%s" %target.hp
+	else:
+		$MarginContainer/VBoxContainer/HBoxContainer/Bars/Bar/Count.set_visible(false)
+	
 	
 	#Handle the buttons to change based on given icons
 	var buttons = $MarginContainer/VBoxContainer/BottomHBox/ButtonLayout/Control.get_children()

@@ -6,7 +6,6 @@ const touch = 1
 enum Behaviour {Jumpy, Walk, Dashy, Stand}
 
 signal hurtplayer(dealt:float)
-var target: Node3D
 
 
 func _on_player_hit() -> void:
@@ -19,9 +18,14 @@ func _on_body_detected(body: Node3D) -> void:
 
 
 func _physics_process(delta: float) -> void:
+	itime = 0.8
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
+
+	#updates invincibility
+	itimer += delta
+	batimer += delta
 
 	# Handle jump.
 	if is_on_floor():
@@ -45,10 +49,12 @@ func _physics_process(delta: float) -> void:
 		var collision = get_slide_collision(index)
 		if collision.get_collider() == null:
 			continue
-		if collision.get_collider().is_in_group("player"):
+		if touch_attacks and collision.get_collider().is_in_group("player"):
 			print("bumped player")
 			var mob = collision.get_collider()
 			_on_player_hit()
+	#attack target if they're within range
+	regular_attack()
 	
 	var direction = (player_position - position).normalized()
 	position += direction * delta

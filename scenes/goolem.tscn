@@ -17,7 +17,6 @@ hp = 3
 mp = 0
 mhp = 3
 mmp = 0
-speed = 3
 
 [node name="goolem" parent="." instance=ExtResource("2_fv0wy")]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)

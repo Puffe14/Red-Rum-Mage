@@ -68,12 +68,6 @@ offset_bottom = 248.0
 [node name="Player" parent="." groups=["player"] instance=ExtResource("3_00vey")]
 sword = ExtResource("13_l4h8s")
 
-[node name="BoneAttachmentWeapon" parent="Player/Pivot/chocuf/metarig/Skeleton3D" index="6"]
-transform = Transform3D(-0.956847, -0.198969, 0.211788, 0.232265, -0.961645, 0.145919, 0.174631, 0.188813, 0.966361, -0.283117, 1.29809, -0.0836587)
-
-[node name="BoneAttachmentHat" parent="Player/Pivot/chocuf/metarig/Skeleton3D" index="7"]
-transform = Transform3D(1, -6.12843e-14, 2.3842e-07, 6.62709e-14, 1, -1.86265e-08, -2.3842e-07, 1.67638e-08, 1, -3.83284e-10, 1.61132, -0.0114)
-
 [node name="HorizontalPivot" type="Node3D" parent="Player"]
 script = ExtResource("7_te16k")
 
@@ -91,12 +85,18 @@ rewards = Array[ExtResource("10_d0q1f")]([ExtResource("9_ph784"), ExtResource("1
 
 [node name="Gooblah" parent="Room" instance=ExtResource("4_hr1vl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -4.50091)
+speed = 6.0
+auto_attacks = false
 
 [node name="Gooblah2" parent="Room" instance=ExtResource("4_hr1vl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.15389, 0, -4.50091)
+speed = 6.0
+auto_attacks = false
 
 [node name="Goolem" parent="Room" instance=ExtResource("8_t008x")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.78356, -5.58474)
+auto_attacks = false
+touch_attacks = true
 
 [node name="CameraPivot" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.534898, 0.844917, 0, -0.844917, -0.534898, 0.717864, 4.88927, 3.00616)

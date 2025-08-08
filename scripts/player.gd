@@ -27,10 +27,6 @@ var curAnim
 var interrupted = false
 var casting = false
 @export var currentTime = 0
-#time for invincibility
-@export var itime = 0.8
-var itimer = 0
-
 
 #signals
 signal hurt
@@ -125,6 +121,7 @@ func _physics_process(delta: float) -> void:
 	direction = Vector3.ZERO
 	#updates invincibility
 	itimer += delta
+	batimer += delta
 	
 	#can't moven when just hurt
 	#if itime < itimer/4:
@@ -233,12 +230,14 @@ func _physics_process(delta: float) -> void:
 			$Pivot/chocuf/AnimationPlayer.speed_scale = 1
 			playAnim("Wave loop")
 	#player attacks
-	elif bp("hit") and !skill_or_spelling():
+	elif bp("hit") and !skill_or_spelling() and batimer>batkspd:
 		$Pivot/chocuf/AnimationPlayer.speed_scale = 2
 		if curAnim == "Atk Swing":
 			playAnim("Atk Stab")
 		else:
 			playAnim("Atk Swing")
+		#attack the target if they're in range
+		regular_attack(satk)
 	#updates current time with delta if casting
 	if casting == true:
 		$Pivot/chocuf/AnimationPlayer.speed_scale = 1
@@ -297,13 +296,12 @@ func bar2Change(dif: int):
 
 func _on_hurtplayer(dealt:int) -> void:
 	if alive and itimer >= itime:
-		itimer = 0
 		#player gets hurt
 		print("player HURT")
 		$Pivot/chocuf/AnimationPlayer.speed_scale = 1
 		playAnim("Hurt")
 		interrupted = true
-		hpChange(-dealt)
+		hpChange(-dealt, true)
 	else: print("invulnerable")
 
 func actionable() -> bool:
@@ -315,3 +313,8 @@ func equipSword(new_sword: Sword) -> void:
 
 func skill_or_spelling() -> bool:
 	return skilling or spelling
+
+
+func _on_target_range_area_entered(body: Area3D) -> void:
+	if body.is_in_group("enemy"):
+		target = body.get_parent()

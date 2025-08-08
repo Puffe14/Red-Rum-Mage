@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://bibraxe3vprps"]
+
+[ext_resource type="Texture2D" uid="uid://deq5yxfcea04b" path="res://image/ui/slim bar bg.png" id="1_vkaeq"]
+[ext_resource type="Texture2D" uid="uid://kiesgcsw4ewj" path="res://image/ui/slim bar f1.png" id="2_gif5p"]
+
+[node name="HP" type="VBoxContainer"]
+size_flags_vertical = 8
+
+[node name="GaugeHP" type="TextureProgressBar" parent="."]
+custom_minimum_size = Vector2(50, 7)
+layout_mode = 2
+size_flags_vertical = 8
+value = 50.0
+texture_under = ExtResource("1_vkaeq")
+texture_progress = ExtResource("2_gif5p")
+
+[node name="PRC" type="Label" parent="."]
+layout_mode = 2
+text = "HP: 0/0"
