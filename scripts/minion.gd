@@ -5,6 +5,7 @@ const touch = 1
 @export var behaviour: Behaviour
 enum Behaviour {Jumpy, Walk, Dashy, Stand}
 
+
 signal hurtplayer(dealt:float)
 
 
@@ -19,18 +20,30 @@ func _on_body_detected(body: Node3D) -> void:
 
 func _physics_process(delta: float) -> void:
 	itime = 0.8
+	scale*size
+	# handle DEATH
+	if hp <= 0:
+		if !invincible():
+			queue_free()
+
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
+	else:
+		pass
+		#animator.play("move loop")
 
 	#updates invincibility
 	itimer += delta
 	batimer += delta
 
 	# Handle jump.
-	if is_on_floor():
+	if is_on_floor() and !invincible():
 		if behaviour == Behaviour.Jumpy:
+			animator.play("jump")
 			velocity.y = JUMP_VELOCITY
+		elif batimer>batkspd/2: #animator.curresnt_animation!="move loop" and 
+			animator.play("move loop")
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -72,9 +85,7 @@ func _on_hitbox_entered(body: Area3D) -> void:
 		print("projectile hit")
 		#grab the projectiles damage stored in the area3Ds parent node
 		var taken = body.get_parent().damage
-		hpChange(-taken)
-		if hp<1:
-			queue_free()
+		getHurt(taken)
 
 
 func _on_dmgbox_entered(body: Area3D) -> void:

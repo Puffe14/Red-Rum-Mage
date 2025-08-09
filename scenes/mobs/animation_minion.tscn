@@ -1,0 +1,76 @@
+[gd_scene load_steps=7 format=3 uid="uid://djlopd6t5n78n"]
+
+[sub_resource type="Animation" id="Animation_yo7le"]
+length = 0.001
+tracks/0/type = "scale_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("body")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 1, 1, 1)
+
+[sub_resource type="Animation" id="Animation_i8w1n"]
+resource_name = "base_atk"
+length = 0.4
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("body")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.1, 1, -0.276443, 0, 0, 0.96103, 0.2, 1, 0.614106, 0, 0, 0.789223, 0.4, 1, 0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_svx0p"]
+resource_name = "hurt"
+length = 0.5
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("body")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.166667, 1, -0.469726, 0, 0, 0.882812, 0.266667, 1, 0, 0, 0, 1)
+tracks/1/type = "scale_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("body")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 1, 1, 1, 0.2, 1, 1.62439, 0.58373, 0.859281, 0.5, 1, 1, 1, 1)
+
+[sub_resource type="Animation" id="Animation_g08qm"]
+resource_name = "jump"
+tracks/0/type = "scale_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("body")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0.0333333, 1, 1, 1, 1, 0.733333, 1, 1.45488, 0.624722, 1.51729, 0.966667, 1, 1, 1, 1)
+
+[sub_resource type="Animation" id="Animation_kp4pi"]
+resource_name = "move loop"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "scale_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("body")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 1, 1, 1, 0.233333, 1, 1.21565, 0.846058, 1.28132, 0.5, 1, 1, 1, 1)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nviiu"]
+_data = {
+"RESET": SubResource("Animation_yo7le"),
+"base_atk": SubResource("Animation_i8w1n"),
+"hurt": SubResource("Animation_svx0p"),
+"jump": SubResource("Animation_g08qm"),
+"move loop": SubResource("Animation_kp4pi")
+}
+
+[node name="AnimationMinion" type="AnimationPlayer"]
+libraries = {
+"": SubResource("AnimationLibrary_nviiu")
+}

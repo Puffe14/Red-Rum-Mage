@@ -40,20 +40,38 @@ visible = false
 visible = false
 
 [node name="Skeleton3D" parent="Pivot/chocuf/metarig" index="2"]
+bones/0/position = Vector3(0, 0.963024, -0.0552)
+bones/1/rotation = Quaternion(-0.0781701, 1.18845e-07, -9.3186e-09, 0.99694)
+bones/3/position = Vector3(0.00936944, 0.162595, 0.000525409)
+bones/3/rotation = Quaternion(-0.194292, -0.753235, 0.27631, 0.564394)
 bones/3/scale = Vector3(1, 1, 1)
+bones/4/rotation = Quaternion(0.206235, -0.146829, 0.143279, 0.956755)
+bones/5/rotation = Quaternion(0.00939902, -1.42155e-14, 2.2409e-09, 0.999956)
+bones/6/rotation = Quaternion(-0.691433, -0.297846, -0.427408, 0.50053)
 bones/6/scale = Vector3(1, 1, 1)
+bones/7/position = Vector3(-0.0179714, 0.162509, 0.0141986)
+bones/7/rotation = Quaternion(-0.194292, 0.753235, -0.27631, 0.564394)
 bones/7/scale = Vector3(1, 1, 1)
+bones/8/rotation = Quaternion(0.206235, 0.146829, -0.143279, 0.956755)
 bones/8/scale = Vector3(1, 1, 1)
+bones/9/position = Vector3(-0.0218845, 0.00187062, 0.0134989)
+bones/9/rotation = Quaternion(-0.122674, -0.775677, -0.330471, 0.523512)
+bones/10/position = Vector3(-0.0218846, 0.00187062, 0.0134989)
+bones/10/rotation = Quaternion(-0.122674, 0.775677, 0.330471, 0.523512)
+bones/11/rotation = Quaternion(0.990242, -0.0381341, 0.00517979, 0.13394)
 bones/11/scale = Vector3(1, 1, 1)
+bones/12/rotation = Quaternion(-0.156236, 0.00599587, -0.0380143, 0.98697)
 bones/12/scale = Vector3(1, 1, 1)
+bones/13/rotation = Quaternion(0.990242, 0.0381341, -0.00517979, 0.13394)
 bones/13/scale = Vector3(1, 1, 1)
+bones/14/rotation = Quaternion(-0.156236, -0.00599587, 0.0380143, 0.98697)
 bones/14/scale = Vector3(1, 1, 1)
 
 [node name="BoneAttachmentWeapon" parent="Pivot/chocuf/metarig/Skeleton3D" index="6"]
-transform = Transform3D(-0.956847, -0.198969, 0.211788, 0.232265, -0.961645, 0.145919, 0.174631, 0.188813, 0.966361, -0.283117, 1.29809, -0.0836587)
+transform = Transform3D(-0.956847, -0.19897, 0.211789, 0.232265, -0.961645, 0.145919, 0.174632, 0.188813, 0.966361, -0.283116, 1.29809, -0.0836586)
 
 [node name="BoneAttachmentHat" parent="Pivot/chocuf/metarig/Skeleton3D" index="7"]
-transform = Transform3D(1, -6.12843e-14, 2.3842e-07, 6.62709e-14, 1, -1.86265e-08, -2.3842e-07, 1.67638e-08, 1, -3.83284e-10, 1.61132, -0.0114)
+transform = Transform3D(1, 1.77636e-15, 2.38419e-07, 7.20816e-15, 1, -2.79397e-08, -2.38419e-07, 2.6077e-08, 1, -3.8326e-10, 1.61132, -0.0114)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.27783, 0)

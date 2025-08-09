@@ -6,9 +6,9 @@ class_name Player
 @export var bar1 = 0
 @export var bar2 = 0
 #atk swrd/mag
-@export var satk = 1
-@export var matk = 2
-@export var potency = 3
+@export var satk: float = 1
+@export var matk: float = 2
+@export var potency: float = 3
 # sword used and potions left
 @export var pots: int = 2
 @export var sword: Sword
@@ -26,7 +26,7 @@ var curAnim
 #casting and timer
 var interrupted = false
 var casting = false
-@export var currentTime = 0
+@export var currentTime: float = 0
 
 #signals
 signal hurt
@@ -39,9 +39,9 @@ var insta_cbb: bool = false
 
 #physics
 # gravity when in air, m/s^2
-@export var fall_acceleration = 75
+@export var fall_acceleration: float = 75
 #impulse for jumping
-@export var jump_impulse = 20
+@export var jump_impulse: float = 20
 #stores speed and direction
 var target_velocity = Vector3.ZERO
 var direction = Vector3.ZERO
@@ -294,7 +294,7 @@ func bar2Change(dif: int):
 	elif bar2<0:
 		bar2 = 0
 
-func _on_hurtplayer(dealt:int) -> void:
+func _on_hurtplayer(dealt: float) -> void:
 	if alive and itimer >= itime:
 		#player gets hurt
 		print("player HURT")
@@ -314,6 +314,8 @@ func equipSword(new_sword: Sword) -> void:
 func skill_or_spelling() -> bool:
 	return skilling or spelling
 
+func getHurt(amount: float):
+	_on_hurtplayer(amount)
 
 func _on_target_range_area_entered(body: Area3D) -> void:
 	if body.is_in_group("enemy"):

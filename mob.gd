@@ -14,10 +14,12 @@ extends CharacterBody3D
 @export var target: Node3D = null
 @export var auto_attacks: bool = true
 @export var touch_attacks: bool = false
+@export var size: float = 1
 #time for invincibility
 @export var itime = 0.8
 var itimer = 0
 var batimer = 0
+@export var animator: AnimationPlayer
 
 func hpChange(dif: float, trigger_invi: bool = false):
 	hp += dif
@@ -31,7 +33,7 @@ func hpChange(dif: float, trigger_invi: bool = false):
 
 func attack_target(damage: float) -> void:
 	if target!=null and attackable(atk_range, dist_to_target()):
-		target.hpChange(-damage)
+		target.getHurt(damage)
 		print(name+"deals %s"%damage+" to "+target.name)
 
 #a target can be attack if they are in range and have no invincibility
@@ -51,3 +53,10 @@ func regular_attack(damage: float = batkdmg):
 	if auto_attacks and batimer >= batkspd:
 		attack_target(damage)
 		batimer = 0
+		if animator!=null:
+			animator.play("base_atk")
+
+func getHurt(amount: float):
+	hpChange(-amount)
+	if animator!=null:
+			animator.play("hurt")
