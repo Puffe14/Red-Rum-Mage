@@ -21,6 +21,7 @@ class_name Player
 @export var spelling: bool = false
 @export var skilling: bool = false
 @export var base_icons: Array[CompressedTexture2D]
+@export var targets: Array[Node3D]
 
 var curAnim
 #casting and timer
@@ -106,6 +107,7 @@ func _physics_process(delta: float) -> void:
 		spellSlots = spellBook.slice(0,3)
 		skillSlots = skillBook.slice(0,3)
 		pivot_basis = $HorizontalPivot.basis #$Pivot/chocuf/metarig.basis
+		$TargetRange/TargetRangeShape.scale = Vector3(atk_range/30, 1, atk_range/30)
 		#$Player/HorizontalPivot.basis #/VerticalPivot/SpringArm3D/Camera3D #$Pivot/chocuf/metarig.basis
 
 	# handle DEATH
@@ -274,6 +276,11 @@ func _physics_process(delta: float) -> void:
 		$Pivot/chocuf/AnimationPlayer.speed_scale = 0.8
 		playAnim(emote)
 	
+	#if target != null and target.hp == 0:
+	#	target = null
+	#if target == null and !targets.is_empty():
+	#	target = targets.pop_front()
+	
 	#move character
 	insta_cbb = false
 	velocity = target_velocity
@@ -309,7 +316,8 @@ func actionable() -> bool:
 
 func equipSword(new_sword: Sword) -> void:
 	sword = new_sword
-	#$Pivot/chocuf/metarig/Skeleton3D/BoneAttachmentWeapon/Rapier.scale = sword.atk/100.0
+	$TargetRange/TargetRangeShape.scale = Vector3(atk_range/10, 1, atk_range/10)
+	$Pivot/chocuf/metarig/Skeleton3D/BoneAttachmentWeapon/Rapier.scale = Vector3(sword.atk/100.0,0,0)
 
 func skill_or_spelling() -> bool:
 	return skilling or spelling
@@ -318,5 +326,13 @@ func getHurt(amount: float):
 	_on_hurtplayer(amount)
 
 func _on_target_range_area_entered(body: Area3D) -> void:
-	if body.is_in_group("enemy"):
-		target = body.get_parent()
+	var found = body.get_parent()
+	if found.is_in_group("enemy"):
+		target = found
+		#targets.append(found)
+
+
+func _on_target_range_area_exited(body: Area3D) -> void:
+	var found = body.get_parent()
+	if found.is_in_group("enemy") and target == body.get_parent():
+		target = null

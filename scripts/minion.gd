@@ -20,6 +20,7 @@ func _on_body_detected(body: Node3D) -> void:
 
 func _physics_process(delta: float) -> void:
 	itime = 0.8
+	anim_state = $AnimationStateMinion["parameters/playback"]
 	scale*size
 	# handle DEATH
 	if hp <= 0:
@@ -40,21 +41,21 @@ func _physics_process(delta: float) -> void:
 	# Handle jump.
 	if is_on_floor() and !invincible():
 		if behaviour == Behaviour.Jumpy:
-			animator.play("jump")
+			var anitree: AnimationTree= null
+			anim_state.travel("jump")
 			velocity.y = JUMP_VELOCITY
-		elif batimer>batkspd/2: #animator.curresnt_animation!="move loop" and 
-			animator.play("move loop")
+		#elif batimer>batkspd/2: #animator.curresnt_animation!="move loop" and 
+			#anim_state.travel("move loop")
 
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	var player_position = position
+	# get the current target's position if not null
+	var target_position = position
 		
 	if target != null:
 		if not target.alive:
 			target = null
 		else:
-			player_position = target.position
-			look_at(player_position)
+			target_position = target.position
+			look_at(target_position)
 	
 	#check through collisions
 	for index in range(get_slide_collision_count()):
@@ -68,9 +69,10 @@ func _physics_process(delta: float) -> void:
 			_on_player_hit()
 	#attack target if they're within range
 	regular_attack()
-	
-	var direction = (player_position - position).normalized()
-	position += direction * delta
+	#move closer to target if they're not in range
+	if dist_to_target() > atk_range or touch_attacks:
+		var direction = (target_position - position).normalized()
+		position += direction * delta
 	move_and_slide()
 
 
@@ -97,3 +99,12 @@ func _on_dmgbox_entered(body: Area3D) -> void:
 
 func _on_hurtplayer(dealt: float) -> void:
 	pass # Replace with function body.
+
+
+#for state machine tht overrides regular play
+func regular_attack(damage: float = batkdmg):
+	if auto_attacks and batimer >= batkspd:
+		attack_target(damage)
+		batimer = 0
+		if anim_state!=null:
+			anim_state.travel("base_atk")

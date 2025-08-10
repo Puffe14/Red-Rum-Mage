@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://dusxpl6guivo1"]
+[gd_scene load_steps=7 format=3 uid="uid://dusxpl6guivo1"]
 
 [ext_resource type="Script" path="res://scripts/minion.gd" id="1_85hg7"]
 [ext_resource type="PackedScene" uid="uid://bvvw7wyahj3m4" path="res://models/gooblah_model.tscn" id="2_w5saw"]
 [ext_resource type="PackedScene" uid="uid://djlopd6t5n78n" path="res://scenes/mobs/animation_minion.tscn" id="3_o2qcp"]
+[ext_resource type="PackedScene" uid="uid://b8wedr4vx8pmb" path="res://scenes/mobs/animation_state_minion.tscn" id="4_aixni"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_tdid6"]
 
@@ -45,6 +46,8 @@ transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, 0, 1.26552, 0)
 shape = SubResource("BoxShape3D_4vmtf")
 
 [node name="AnimationMinion" parent="." instance=ExtResource("3_o2qcp")]
+
+[node name="AnimationStateMinion" parent="." instance=ExtResource("4_aixni")]
 
 [connection signal="hurtplayer" from="." to="." method="_on_hurtplayer"]
 [connection signal="body_entered" from="DetectBox" to="." method="_on_body_detected"]

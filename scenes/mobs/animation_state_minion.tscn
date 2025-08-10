@@ -1,0 +1,50 @@
+[gd_scene load_steps=11 format=3 uid="uid://b8wedr4vx8pmb"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_smrs5"]
+animation = &"base_atk"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_auvso"]
+animation = &"hurt"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4rhg8"]
+animation = &"hurt"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_78165"]
+animation = &"jump"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_igtvg"]
+animation = &"move loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jvbfe"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_l4bq7"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8bbck"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mrtlt"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_xi3nm"]
+states/Start/position = Vector2(191, 152)
+states/base_atk/node = SubResource("AnimationNodeAnimation_smrs5")
+states/base_atk/position = Vector2(568, 100)
+states/hurt/node = SubResource("AnimationNodeAnimation_4rhg8")
+states/hurt/position = Vector2(551, 253)
+"states/hurt 2/node" = SubResource("AnimationNodeAnimation_auvso")
+"states/hurt 2/position" = Vector2(392, 149)
+states/jump/node = SubResource("AnimationNodeAnimation_78165")
+states/jump/position = Vector2(341, 253)
+"states/move loop/node" = SubResource("AnimationNodeAnimation_igtvg")
+"states/move loop/position" = Vector2(406, 149)
+transitions = ["Start", "move loop", SubResource("AnimationNodeStateMachineTransition_jvbfe"), "base_atk", "move loop", SubResource("AnimationNodeStateMachineTransition_l4bq7"), "hurt", "move loop", SubResource("AnimationNodeStateMachineTransition_8bbck"), "jump", "move loop", SubResource("AnimationNodeStateMachineTransition_mrtlt")]
+graph_offset = Vector2(-116, 54)
+
+[node name="AnimationStateMinion" type="AnimationTree"]
+tree_root = SubResource("AnimationNodeStateMachine_xi3nm")
+anim_player = NodePath("../AnimationMinion")

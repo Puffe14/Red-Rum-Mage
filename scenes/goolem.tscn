@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://kab1f5kaan02"]
+[gd_scene load_steps=7 format=3 uid="uid://kab1f5kaan02"]
 
 [ext_resource type="Script" path="res://scripts/minion.gd" id="1_i26ly"]
 [ext_resource type="PackedScene" uid="uid://rs3kasl1q6o0" path="res://models/goolem.glb" id="2_fv0wy"]
 [ext_resource type="PackedScene" uid="uid://djlopd6t5n78n" path="res://scenes/mobs/animation_minion.tscn" id="3_cnbnr"]
+[ext_resource type="PackedScene" uid="uid://b8wedr4vx8pmb" path="res://scenes/mobs/animation_state_minion.tscn" id="3_ld68v"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_tdid6"]
 
@@ -18,10 +19,13 @@ hp = 3
 mp = 0
 mhp = 3
 mmp = 0
+atk_range = 5.0
 size = 0.1
 animator = NodePath("AnimationMinion")
 
 [node name="AnimationMinion" parent="." instance=ExtResource("3_cnbnr")]
+
+[node name="AnimationStateMinion" parent="." instance=ExtResource("3_ld68v")]
 
 [node name="DetectBox" type="Area3D" parent="."]
 
